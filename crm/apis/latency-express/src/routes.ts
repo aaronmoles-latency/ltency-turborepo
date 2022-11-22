@@ -1,17 +1,9 @@
-import {Request, Response, Router} from "express";
-import {container} from "./container";
-import Controller from "./shared/controller";
-import {HttpMethod} from "./shared/http-method";
-import {DiTag} from "./shared/di/di-tag";
-import {controllers} from "./shared/decorators/controller.decorator";
-
-export function registerControllers(router: Router) {
-    const controllerIds = container.findTaggedServiceIdentifiers(DiTag.CONTROLLER)
-    controllerIds.forEach(controllerId => {
-        const controller = container.get(controllerId) as Controller
-        register(controller, router)
-    });
-}
+import { Request, Response, Router } from 'express';
+import { container } from './container';
+import Controller from './shared/controller';
+import { HttpMethod } from './shared/http-method';
+import { DiTag } from './shared/di/di-tag';
+import { controllers } from './shared/decorators/controller.decorator';
 
 function register(controller: Controller, router: Router) {
     const config = controllers.get(controller.constructor.name)
@@ -34,4 +26,12 @@ function register(controller: Controller, router: Router) {
         default:
             throw new Error(`Method ${config.method} not supported.`)
     }
+}
+
+export function registerControllers(router: Router) {
+    const controllerIds = container.findTaggedServiceIdentifiers(DiTag.CONTROLLER)
+    controllerIds.forEach((controllerId) => {
+        const controller = container.get(controllerId) as Controller
+        register(controller, router)
+    });
 }

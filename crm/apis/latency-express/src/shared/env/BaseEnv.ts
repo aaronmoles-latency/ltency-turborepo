@@ -1,4 +1,4 @@
-import  {Env, EnvType } from './Env';
+import { Env, EnvType } from './Env';
 
 export default abstract class BaseEnv<K extends EnvType> implements Env<K> {
     private readonly env: K;

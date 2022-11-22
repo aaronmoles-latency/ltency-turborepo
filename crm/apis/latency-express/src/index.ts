@@ -1,15 +1,15 @@
+/* eslint-disable no-console */
 import 'reflect-metadata';
-import {LatencyExpressApp} from "./latency-express.app";
+import { LatencyExpressApp } from './latency-express.app';
 
 try {
     new LatencyExpressApp().start();
-    console.log('Change')
-} catch (e) {
-    console.log(e);
+} catch (error) {
+    console.log(error);
     process.exit(1);
 }
 
-process.on('uncaughtException', err => {
-    console.log('uncaughtException', err);
+process.on('uncaughtException', (error) => {
+    console.log('uncaughtException', error);
     process.exit(1);
 });

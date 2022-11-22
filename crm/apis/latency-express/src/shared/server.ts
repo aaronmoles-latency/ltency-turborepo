@@ -1,14 +1,14 @@
 import bodyParser from 'body-parser';
 import compress from 'compression';
 import errorHandler from 'errorhandler';
-import express, {Request, Response, Router as ExpressRouter} from 'express';
+import express, { Request, Response, Router as ExpressRouter } from 'express';
 import Router from 'express-promise-router';
 import helmet from 'helmet';
 import * as http from 'http';
 import httpStatus from 'http-status';
 import cors from 'cors';
-import {Logger} from "./Logger";
-import {Env, EnvType} from "./env/Env";
+import { Logger } from './Logger';
+import { Env, EnvType } from './env/Env';
 
 export interface ServerConfig {
     logger: Logger,
@@ -23,7 +23,7 @@ export class Server {
     httpServer?: http.Server;
 
     constructor({ logger, envService, registerRoutes }: ServerConfig) {
-        this.port = envService.get("PORT");
+        this.port = envService.get('PORT');
         this.logger = logger;
         this.express = express();
         this.express.use(bodyParser.json());
@@ -39,17 +39,17 @@ export class Server {
         this.express.use(router);
         registerRoutes(router);
 
-        router.use((err: Error, req: Request, res: Response, next: Function) => {
-            this.logger.error(err);
-            res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+        router.use((error: Error, req: Request, res: Response, next: () => void) => {
+            this.logger.error(error);
+            res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error.message);
         });
     }
 
     async listen(): Promise<void> {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             this.httpServer = this.express.listen(this.port, () => {
                 this.logger.info(
-                    `  Backoffice Backend App is running at http://localhost:${this.port} in ${this.express.get('env')} mode`
+                    `  Backoffice Backend App is running at http://localhost:${this.port} in ${this.express.get('env')} mode`,
                 );
                 this.logger.info('  Press CTRL-C to stop\n');
                 resolve();
@@ -64,7 +64,7 @@ export class Server {
     async stop(): Promise<void> {
         return new Promise((resolve, reject) => {
             if (this.httpServer) {
-                this.httpServer.close(error => {
+                this.httpServer.close((error) => {
                     if (error) {
                         return reject(error);
                     }
@@ -72,7 +72,7 @@ export class Server {
                 });
             }
 
-            return resolve();
+            resolve();
         });
     }
 }

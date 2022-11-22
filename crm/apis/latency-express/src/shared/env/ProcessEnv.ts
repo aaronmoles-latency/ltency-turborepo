@@ -1,5 +1,5 @@
 import BaseEnv from './BaseEnv';
-import {EnvType} from './Env';
+import { EnvType } from './Env';
 
 export default abstract class ProcessEnv<K extends EnvType> extends BaseEnv<K> {
     protected constructor(variables: K) {

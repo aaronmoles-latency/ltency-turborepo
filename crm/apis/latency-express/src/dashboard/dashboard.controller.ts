@@ -1,7 +1,7 @@
-import {Request, Response} from "express";
-import {GetController} from "../shared/decorators/controller.decorator";
-import DashboardService from "./dashboard.service";
-import Controller from "../shared/controller";
+import { Request, Response } from 'express';
+import { GetController } from '../shared/decorators/controller.decorator';
+import DashboardService from './dashboard.service';
+import Controller from '../shared/controller';
 
 @GetController('/dashboard')
 export default class DashboardController implements Controller {
@@ -12,6 +12,6 @@ export default class DashboardController implements Controller {
 
     async run(req: Request, res: Response): Promise<void> {
         const result = await this.dashboardService.run()
-        res.json({data: result});
+        res.json({ data: result });
     }
 }

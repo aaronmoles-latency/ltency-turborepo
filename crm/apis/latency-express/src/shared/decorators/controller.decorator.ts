@@ -1,5 +1,5 @@
-import {HttpMethod} from "../http-method";
-import ControllerConfig from "../controller.config";
+import { HttpMethod } from '../http-method';
+import ControllerConfig from '../controller.config';
 
 export const controllers: Map<string, ControllerConfig> = new Map();
 

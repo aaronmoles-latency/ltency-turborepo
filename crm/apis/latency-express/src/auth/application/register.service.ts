@@ -1,5 +1,5 @@
-import {Service} from "../../shared/decorators/service.decorator";
-import {AuthRepository} from "../domain/auth.repository";
+import { Service } from '../../shared/decorators/service.decorator';
+import { AuthRepository } from '../domain/auth.repository';
 
 @Service()
 export default class RegisterService {

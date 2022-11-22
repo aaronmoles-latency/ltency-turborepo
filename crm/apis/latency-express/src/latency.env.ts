@@ -1,10 +1,8 @@
-import DotEnv from "./shared/env/DotEnv";
-import {EnvType} from "./shared/env/Env";
-import {Service} from "./shared/decorators/service.decorator";
+import DotEnv from './shared/env/DotEnv';
+import { EnvType } from './shared/env/Env';
+import { Service } from './shared/decorators/service.decorator';
 
-interface Env extends EnvType{
-
-}
+type Env = EnvType
 
 @Service()
 export default class LatencyEnv extends DotEnv<Env> {

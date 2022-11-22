@@ -1,26 +1,21 @@
 import 'reflect-metadata';
-import {Container, ContainerBuilder} from "diod";
-import {glob} from "glob";
-import {Module} from "../module";
+import { Container, ContainerBuilder } from 'diod';
+import { Module } from '../module';
+import { NewableClass } from '../newable-class';
 
-function registerModules(builder: ContainerBuilder) {
-    const { dirname } = require('path');
-    const appDir = require.main ? dirname(require.main?.filename) : require.main;
-
-    const modules = glob.sync(appDir + '/**/*.module.*');
+function registerModules(modules: NewableClass<Module>[], builder: ContainerBuilder) {
     modules.forEach((module) => {
-        const moduleClass = require(module).default
-        const moduleInstance = Reflect.construct<[], Module>(moduleClass, [])
+        const moduleInstance = Reflect.construct<[], Module>(module, [])
         moduleInstance.register(builder)
     });
 }
 
 
-export function DiContainer(register: (builder: ContainerBuilder) => void): Container {
+export function DiContainer(modules: NewableClass<Module>[], register: (builder: ContainerBuilder) => void): Container {
     const builder = new ContainerBuilder()
 
     register(builder)
-    registerModules(builder)
+    registerModules(modules, builder)
 
     return builder.build()
 }

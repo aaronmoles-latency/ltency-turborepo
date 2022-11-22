@@ -1,4 +1,3 @@
-import {Service} from "../decorators/service.decorator";
 
 export type EnvType = {
     NODE_ENV: string,

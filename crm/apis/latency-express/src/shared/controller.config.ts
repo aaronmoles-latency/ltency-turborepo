@@ -1,4 +1,4 @@
-import {HttpMethod} from "./http-method";
+import { HttpMethod } from './http-method';
 
 export default interface ControllerConfig {
     path: string,

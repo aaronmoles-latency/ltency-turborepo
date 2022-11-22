@@ -1,5 +1,6 @@
-import {Logger} from "./Logger";
-import {Service} from "./decorators/service.decorator";
+/* eslint-disable no-console */
+import { Logger } from './Logger';
+import { Service } from './decorators/service.decorator';
 
 @Service()
 export default class SystemLogger implements Logger {

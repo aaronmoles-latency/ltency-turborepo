@@ -1,8 +1,8 @@
-import {Request, Response} from "express";
-import Controller from "../../../shared/controller";
-import RegisterService from "../../application/register.service";
-import {PostController} from "../../../shared/decorators/controller.decorator";
-import httpStatus from "http-status";
+import { Request, Response } from 'express';
+import Controller from '../../../shared/controller';
+import RegisterService from '../../application/register.service';
+import { PostController } from '../../../shared/decorators/controller.decorator';
+import httpStatus from 'http-status';
 
 @PostController('/auth')
 export default class RegisterController implements Controller {

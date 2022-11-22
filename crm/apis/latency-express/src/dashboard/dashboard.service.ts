@@ -1,4 +1,4 @@
-import {Service} from "../shared/decorators/service.decorator";
+import { Service } from '../shared/decorators/service.decorator';
 
 @Service()
 export default class DashboardService {
