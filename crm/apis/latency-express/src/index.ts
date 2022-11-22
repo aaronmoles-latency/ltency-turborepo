@@ -3,6 +3,7 @@ import {LatencyExpressApp} from "./latency-express.app";
 
 try {
     new LatencyExpressApp().start();
+    console.log('Change')
 } catch (e) {
     console.log(e);
     process.exit(1);
