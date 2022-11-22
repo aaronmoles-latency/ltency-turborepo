@@ -5,6 +5,7 @@
   "types": "./index.tsx",
   "license": "MIT",
   "scripts": {
+    "build": "echo 'Build UI components'",
     "lint": "TIMING=1 eslint \"**/*.ts*\""
   },
   "devDependencies": {

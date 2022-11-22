@@ -1,5 +1,5 @@
 {
-  "name": "crm-api-latency-express",
+  "name": "latency-express",
   "version": "0.0.0",
   "description": "Test to express latency",
   "main": "src/index.ts",
