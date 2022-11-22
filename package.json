@@ -3,8 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "crm/apps/*",
+    "crm/apis/*",
+    "crm/components/*",
+    "crm/packages/*",
+    "gitops/*",
+    "data/*"
   ],
   "scripts": {
     "build": "turbo run build",
@@ -13,13 +17,11 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "eslint-config-custom": "*",
-    "prettier": "latest",
     "turbo": "latest"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=19.0.0",
+    "npm": ">=8.0.0"
   },
-  "dependencies": {},
-  "packageManager": "npm@8.19.3"
+  "dependencies": {}
 }

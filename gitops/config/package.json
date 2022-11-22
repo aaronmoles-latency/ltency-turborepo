@@ -1,0 +1,11 @@
+{
+  "name": "gitops-config",
+  "version": "0.0.0",
+  "description": "Kustomize files",
+  "scripts": {
+    "build:stagging": "kustomize build overlays/staging",
+    "build:production": "kustomize build overlays/production"
+  },
+  "author": "amoles",
+  "license": "ISC"
+}

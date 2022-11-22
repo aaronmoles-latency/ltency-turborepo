@@ -1,0 +1,13 @@
+{
+  "name": "data-importer",
+  "version": "0.0.0",
+  "description": "Data importer",
+  "scripts": {
+    "run": "python3 src/hello.py",
+    "build": "echo 'Build Data Importer'",
+    "test": "echo 'Test Data Importer'",
+    "lint": "echo 'Lint Data Importer'"
+  },
+  "author": "amoles",
+  "license": "ISC"
+}

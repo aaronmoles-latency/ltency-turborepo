@@ -1,0 +1,14 @@
+{
+  "name": "gitops-infrastructure",
+  "version": "0.0.0",
+  "description": "Terraform files",
+  "scripts": {
+    "init": "terraform init",
+    "validate": "terraform validate",
+    "plan": "terraform plan",
+    "apply": "terraform apply",
+    "destroy": "terraform destroy"
+  },
+  "author": "amoles",
+  "license": "ISC"
+}
