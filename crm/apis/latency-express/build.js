@@ -1,18 +1,20 @@
 #!/usr/bin/env node
+/* eslint-disable @typescript-eslint/no-var-requires */
 
-import esbuild from 'esbuild';
-import {esbuildPluginDecorator} from 'esbuild-plugin-decorator';
+const {esbuildPluginDecorator} = require('esbuild-plugin-decorator');
 
-esbuild.build({
-	entryPoints: ['./src/index.ts'],
-	bundle: true,
-	outfile: './dist/index.js',
-	tsconfig: './tsconfig.json',
-	platform: 'node',
-	minify: true,
-	plugins: [
-		esbuildPluginDecorator({
-			tsconfigPath: 'tsconfig.json',
-		}),
-	],
-}).catch(() => process.exit(1));
+require('esbuild')
+	.build({
+		entryPoints: ['./src/index.ts'],
+		bundle: true,
+		outfile: './dist/index.js',
+		tsconfig: './tsconfig.json',
+		platform: 'node',
+		minify: true,
+		plugins: [
+			esbuildPluginDecorator({
+				tsconfigPath: 'tsconfig.json',
+			}),
+		],
+	})
+	.catch(() => process.exit(1));

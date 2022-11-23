@@ -4,9 +4,9 @@
   "description": "Test to express latency",
   "main": "src/index.ts",
   "scripts": {
-    "start": "node ../../dist/api/latency-express/src/index.js",
+    "start": "node dist/index.js",
     "dev": "ts-node-dev src/index.ts --swc",
-    "build": "npx esbuild ./src/index.js --bundle --platform=node --outfile=dist/index.js",
+    "build": "node build.js",
     "test": "NODE_ENV=test jest",
     "clean": "rm -r dist"
   },
@@ -17,7 +17,6 @@
     "cors": "2.8.5",
     "diod": "2.0.0",
     "dotenv": "16.0.3",
-    "errorhandler": "1.5.1",
     "express": "4.18.2",
     "express-promise-router": "4.1.1",
     "glob": "8.0.3",
@@ -28,13 +27,15 @@
   "devDependencies": {
     "@types/compression": "1.7.2",
     "@types/cors": "2.8.12",
-    "@types/errorhandler": "1.5.0",
     "@types/express": "4.17.14",
     "@types/glob": "8.0.0",
     "@types/jest": "^29.2.3",
+    "esbuild": "^0.14.54",
     "esbuild-jest": "0.5.0",
+    "esbuild-plugin-decorator": "^0.4.0",
     "eslint-config-custom": "*",
-		"tsconfig": "*",
-    "jest": "29.3.1"
+    "jest": "29.3.1",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig": "*"
   }
 }

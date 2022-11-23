@@ -1,7 +1,6 @@
 import bodyParser from 'body-parser';
 import compress from 'compression';
 import cors from 'cors';
-import errorHandler from 'errorhandler';
 import express, { Request, Response, Router as ExpressRouter } from 'express';
 import Router from 'express-promise-router';
 import helmet from 'helmet';
@@ -19,8 +18,11 @@ export interface ServerConfig {
 
 export class Server {
 	private express: express.Express;
+
 	readonly port: string;
+
 	private logger: Logger;
+
 	httpServer?: http.Server;
 
 	constructor({ logger, envService, registerRoutes }: ServerConfig) {
@@ -36,14 +38,13 @@ export class Server {
 		this.express.use(compress());
 		const router = Router();
 		router.use(cors());
-		router.use(errorHandler());
 		this.express.use(router);
-		registerRoutes(router);
-
-		router.use((error: Error, req: Request, res: Response) => {
+		this.express.use((error: Error, req: Request, res: Response, _next: unknown) => {
 			this.logger.error(error);
-			res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error.message);
+			res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ error: error.message });
 		});
+
+		registerRoutes(router);
 	}
 
 	async listen(): Promise<void> {
