@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { Logger } from 'express-server';
+import { Logger } from '@latency/express-server';
 
 import { Service } from './decorators/service.decorator';
 

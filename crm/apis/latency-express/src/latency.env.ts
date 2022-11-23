@@ -1,4 +1,4 @@
-import { DotEnv, EnvType } from 'express-server';
+import { DotEnv, EnvType } from '@latency/express-server';
 
 import { Service } from './shared/decorators/service.decorator';
 

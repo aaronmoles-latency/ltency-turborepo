@@ -1,4 +1,4 @@
-import { Env, Logger, Server } from 'express-server';
+import { Env, Logger, Server } from '@latency/express-server';
 
 import { container } from './container';
 import { registerControllers as registerRoutes } from './routes';

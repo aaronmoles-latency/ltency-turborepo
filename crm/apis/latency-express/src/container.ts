@@ -1,5 +1,5 @@
+import { Env, Logger } from '@latency/express-server';
 import { ContainerBuilder } from 'diod';
-import { Env, Logger } from 'express-server';
 
 import AuthModule from './auth/auth.module';
 import DashboardModule from './dashboard/dashboard.module';

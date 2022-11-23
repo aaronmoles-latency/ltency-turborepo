@@ -13,6 +13,7 @@
   "author": "amoles",
   "license": "ISC",
   "dependencies": {
+    "@latency/express-server": "*",
     "compresion": "1.7.11",
     "cors": "2.8.5",
     "diod": "2.0.0",
