@@ -1,12 +1,13 @@
 import { ContainerBuilder } from 'diod';
+
 import { DiTag } from '../shared/di/di-tag';
 import { Module } from '../shared/module';
-import DashboardController from './dashboard.controller';
-import DashboardService from './dashboard.service';
+import DashboardService from './application/dashboard.service';
+import DashboardController from './infrastructure/dashboard.controller';
 
 export default class DashboardModule extends Module {
-    register(builder: ContainerBuilder): void {
-        builder.registerAndUse(DashboardController).addTag(DiTag.CONTROLLER)
-        builder.registerAndUse(DashboardService)
-    }
+	register(builder: ContainerBuilder): void {
+		builder.registerAndUse(DashboardController).addTag(DiTag.CONTROLLER);
+		builder.registerAndUse(DashboardService);
+	}
 }

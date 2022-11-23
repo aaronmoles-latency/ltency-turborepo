@@ -1,3 +1,3 @@
 export enum DiTag {
-    CONTROLLER = 'CONTROLLER',
+	CONTROLLER = 'CONTROLLER',
 }

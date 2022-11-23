@@ -1,3 +1,3 @@
 export abstract class AuthRepository {
-    abstract save(): Promise<void>;
+	abstract save(): Promise<void>;
 }
