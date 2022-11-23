@@ -1,11 +1,10 @@
 import { ContainerBuilder } from 'diod';
+import { Env, Logger } from 'express-server';
 
 import AuthModule from './auth/auth.module';
 import DashboardModule from './dashboard/dashboard.module';
 import LatencyEnv from './latency.env';
 import { DiContainer } from './shared/di/diContainer';
-import { Env } from './shared/env/Env';
-import { Logger } from './shared/Logger';
 import SystemLogger from './shared/system.logger';
 import UserModule from './user/user.module';
 

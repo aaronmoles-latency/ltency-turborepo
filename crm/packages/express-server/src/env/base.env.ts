@@ -1,6 +1,6 @@
-import { Env, EnvType } from './Env';
+import { Env, EnvType } from './env';
 
-export default abstract class BaseEnv<K extends EnvType> implements Env<K> {
+export abstract class BaseEnv<K extends EnvType> implements Env<K> {
 	private readonly env: K;
 
 	protected constructor(env: K) {

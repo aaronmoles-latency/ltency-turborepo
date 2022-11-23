@@ -1,6 +1,6 @@
+import { DotEnv, EnvType } from 'express-server';
+
 import { Service } from './shared/decorators/service.decorator';
-import DotEnv from './shared/env/DotEnv';
-import { EnvType } from './shared/env/Env';
 
 type Env = EnvType
 

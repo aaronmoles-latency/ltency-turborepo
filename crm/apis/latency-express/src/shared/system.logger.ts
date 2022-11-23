@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
+import { Logger } from 'express-server';
+
 import { Service } from './decorators/service.decorator';
-import { Logger } from './Logger';
 
 @Service()
 export default class SystemLogger implements Logger {

@@ -7,8 +7,8 @@ import helmet from 'helmet';
 import * as http from 'http';
 import httpStatus from 'http-status';
 
-import { Env, EnvType } from './env/Env';
-import { Logger } from './Logger';
+import { Env, EnvType } from '../env';
+import { Logger } from '../logger';
 
 export interface ServerConfig {
 	logger: Logger,
@@ -39,12 +39,12 @@ export class Server {
 		const router = Router();
 		router.use(cors());
 		this.express.use(router);
-		this.express.use((error: Error, req: Request, res: Response, _next: unknown) => {
-			this.logger.error(error);
-			res.status(httpStatus.INTERNAL_SERVER_ERROR).send({ error: error.message });
-		});
-
 		registerRoutes(router);
+
+		router.use((err: Error, req: Request, res: Response, next: Function) => {
+			this.logger.error(err);
+			res.status(httpStatus.INTERNAL_SERVER_ERROR).send(err.message);
+		});
 	}
 
 	async listen(): Promise<void> {
@@ -68,9 +68,9 @@ export class Server {
 			if (this.httpServer) {
 				this.httpServer.close((error) => {
 					if (error) {
-						return reject(error);
+						reject(error);
 					}
-					return resolve();
+					resolve();
 				});
 			}
 

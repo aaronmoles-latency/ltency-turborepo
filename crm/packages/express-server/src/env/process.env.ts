@@ -1,9 +1,9 @@
-import BaseEnv from './BaseEnv';
-import { EnvType } from './Env';
+import { BaseEnv } from './base.env';
+import { EnvType } from './env';
 
-export default abstract class ProcessEnv<K extends EnvType> extends BaseEnv<K> {
+export class ProcessEnv<K extends EnvType> extends BaseEnv<K> {
 	protected constructor(variables: K) {
-		super(variables);
+		super(variables)
 
 		const envKeys = Object.keys(variables);
 
@@ -11,7 +11,7 @@ export default abstract class ProcessEnv<K extends EnvType> extends BaseEnv<K> {
 			const value = process.env[key];
 
 			if (value) {
-				super.set(key, value);
+				super.set(key, value)
 			} else if (!super.get(key)) {
 				throw new Error(`Missing env key ${key}`);
 			}

@@ -1,8 +1,7 @@
+import { Env, Logger, Server } from 'express-server';
+
 import { container } from './container';
 import { registerControllers as registerRoutes } from './routes';
-import { Env } from './shared/env/Env';
-import { Logger } from './shared/Logger';
-import { Server } from './shared/server';
 
 export class LatencyExpressApp {
 	server?: Server;

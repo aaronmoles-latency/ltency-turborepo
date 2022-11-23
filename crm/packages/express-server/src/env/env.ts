@@ -1,4 +1,3 @@
-
 export type EnvType = {
 	NODE_ENV: string,
 	PORT: string,
@@ -7,5 +6,6 @@ export type EnvType = {
 
 export abstract class Env<E extends EnvType> {
 	abstract get(key: keyof E): string;
+
 	abstract set(key: keyof E, value: string): void;
 }
