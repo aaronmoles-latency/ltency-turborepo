@@ -1,5 +1,5 @@
 {
-  "name": "latency-express",
+  "name": "firebase-express",
   "version": "0.0.0",
   "description": "Test to express latency",
   "main": "src/index.ts",
@@ -15,7 +15,8 @@
   "dependencies": {
     "@latency/express-server": "*",
     "diod": "2.0.0",
-    "dotenv": "16.0.3",
+    "firebase-admin": "^11.3.0",
+    "jsonwebtoken": "8.5.1",
     "reflect-metadata": "0.1.13"
   },
   "devDependencies": {

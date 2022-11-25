@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"experimentalDecorators": true,
+		"target": "ES6",
+		"outDir": "./dist",
+		"resolveJsonModule": true,
+		"isolatedModules": false
+	},
+	"extends": "../../packages/tsconfig/base.json",
+	"exclude": ["**/*.spec.ts", "**/*.test.ts"],
+	"include": ["**/*.ts"]
+}

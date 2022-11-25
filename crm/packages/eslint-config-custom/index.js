@@ -52,7 +52,7 @@ module.exports = {
 		"no-throw-literal": "error",
 		"no-var": "error",
 		"no-multi-spaces": "error",
-		"no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
+		"no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0, "maxBOF": 0 }],
 		"object-shorthand": "error",
 		"prefer-const": "error",
 		"prefer-rest-params": "error",

@@ -29,8 +29,8 @@ export class Server {
 		this.port = envService.get('PORT');
 		this.logger = logger;
 		this.express = express();
-		this.express.use(bodyParser.json());
 		this.express.use(bodyParser.urlencoded({ extended: true }));
+		this.express.use(bodyParser.json());
 		this.express.use(helmet.xssFilter());
 		this.express.use(helmet.noSniff());
 		this.express.use(helmet.hidePoweredBy());
