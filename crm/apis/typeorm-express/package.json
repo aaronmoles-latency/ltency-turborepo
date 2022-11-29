@@ -7,6 +7,8 @@
     "start": "node dist/index.js",
     "dev": "ts-node-dev src/index.ts --swc",
     "build": "node build.js",
+    "docker:build": "node build.js && docker build . -t latency/typeorm-express",
+    "docker:run": "docker run -p 3000:3000 --rm latency/typeorm-express",
     "test": "NODE_ENV=test jest",
     "test:features": "NODE_ENV=test cucumber-js -p default",
     "test:e2e": "NODE_ENV=test jest --config jest-e2e.json",

@@ -1,7 +1,7 @@
 #!/usr/bin/value-object node
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const {esbuildPluginDecorator} = require('esbuild-plugin-decorator');
+const { esbuildPluginDecorator } = require('esbuild-plugin-decorator');
 
 require('esbuild')
 	.build({
@@ -10,11 +10,14 @@ require('esbuild')
 		outfile: './dist/index.js',
 		tsconfig: './tsconfig.json',
 		platform: 'node',
-		minify: true,
+		minify: false,
 		plugins: [
 			esbuildPluginDecorator({
 				tsconfigPath: 'tsconfig.json',
 			}),
+		],
+		external: [
+			'pg-native',
 		],
 	})
 	.catch(() => process.exit(1));
