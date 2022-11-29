@@ -18,10 +18,10 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var stdin_exports = {};
 __export(stdin_exports, {
-  default: () => MockAuthRepository
+  default: () => MockUserRepository
 });
 module.exports = __toCommonJS(stdin_exports);
-class MockAuthRepository {
+class MockUserRepository {
   constructor() {
     this.saveSpy = jest.fn();
   }

@@ -11,11 +11,11 @@ describe('AuthFirebaseAuthenticator', () => {
     beforeEach(() => {
         const container = DiTestContainer((builder) => {
             builder.registerAndUse(RegisterService)
-            builder.register(UserRepository).use(MockAuthRepository).asSingleton()
+            builder.register(UserRepository).use(MockUserRepository).asSingleton()
         })
 
         service = container.get(RegisterService)
-        authRepository = container.get(UserRepository) as MockAuthRepository;
+        authRepository = container.get(UserRepository) as MockUserRepository;
     });
      */
 

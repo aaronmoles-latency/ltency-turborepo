@@ -24,11 +24,11 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var stdin_exports = {};
 __export(stdin_exports, {
-  default: () => AuthMother
+  default: () => UserMother
 });
 module.exports = __toCommonJS(stdin_exports);
 var import_auth = __toESM(require("../../../src/auth/domain/auth"));
-class AuthMother {
+class UserMother {
   static create(id = "random_id", email = "random@email.com") {
     return new import_auth.default(id, email);
   }
