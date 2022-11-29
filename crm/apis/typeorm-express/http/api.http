@@ -1,0 +1,19 @@
+### PUT /user/:id
+PUT http://localhost:3000/user/c7c9fb69-8135-4fe4-b20d-eea8f8f6ee52
+Content-Type: application/json
+
+{
+"name": "AARON",
+"roleId": "6878c578-4bae-4a4c-83c5-4396bc8cd9db"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status === 201, "Response status is not 201");
+});
+%}
+
+
+### GET /user
+GET http://localhost:3000/user
+Accept: application/json

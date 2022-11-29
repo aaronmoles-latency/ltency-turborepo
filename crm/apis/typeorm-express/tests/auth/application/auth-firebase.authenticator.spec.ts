@@ -1,4 +1,4 @@
-import AuthFirebaseAuthenticator from '../../../src/auth/application/auth-firebase.authenticator';
+import AuthFirebaseAuthenticator from '../../../src/user/application/auth-firebase.authenticator';
 import MockAccessTokenGenerator from '../__mock__/mock.access-token.generator';
 import MockAuthRepository from '../__mock__/mock.auth.repository';
 

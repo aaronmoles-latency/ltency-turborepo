@@ -5,7 +5,7 @@ import Controller from '../../../shared/controller';
 import { PostController } from '../../../shared/decorators/controller.decorator';
 import RegisterService from '../../application/register.service';
 
-@PostController('/auth')
+@PostController('/user')
 export default class RegisterController implements Controller {
 	constructor(
 		private readonly registerService: RegisterService,

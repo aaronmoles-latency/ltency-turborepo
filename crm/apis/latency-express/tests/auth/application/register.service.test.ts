@@ -9,11 +9,11 @@ describe('tests', () => {
     beforeEach(() => {
         const container = DiTestContainer((builder) => {
             builder.registerAndUse(RegisterService)
-            builder.register(AuthRepository).use(MockAuthRepository).asSingleton()
+            builder.register(UserRepository).use(MockAuthRepository).asSingleton()
         })
 
         service = container.get(RegisterService)
-        authRepository = container.get(AuthRepository) as MockAuthRepository;
+        authRepository = container.get(UserRepository) as MockAuthRepository;
     });
      */
 

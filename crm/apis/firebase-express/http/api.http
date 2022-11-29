@@ -22,7 +22,7 @@ GET http://localhost:3000/auth
 
 > {%
 client.test("Request executed successfully", function() {
-    client.assert(response.body.data === 'auth service', "Response is not correct");
+    client.assert(response.body.data === 'user service', "Response is not correct");
 });
 %}
 

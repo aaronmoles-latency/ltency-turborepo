@@ -4,7 +4,7 @@ import Controller from '../../../shared/controller';
 import { PostController } from '../../../shared/decorators/controller.decorator';
 import AuthFirebaseAuthenticator from '../../application/auth-firebase.authenticator';
 
-@PostController('/auth/firebase')
+@PostController('/user/firebase')
 export default class AuthFirebaseController implements Controller {
 	constructor(
 		private readonly authFirebaseAuthenticator: AuthFirebaseAuthenticator,
