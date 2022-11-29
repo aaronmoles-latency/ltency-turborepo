@@ -5,8 +5,8 @@ import RoleId from '../../../role/domain/role-id';
 import { RoleEntity } from '../../../role/infrastructure/persistence/role.entity';
 import { TypeormEntity } from '../../../shared/persistence/typeorm.entity';
 import User from '../../domain/user';
-import UserId from '../../domain/user-id';
-import UserName from '../../domain/user-name';
+import UserId from '../../domain/value-object/user-id';
+import UserName from '../../domain/value-object/user-name';
 
 @Entity('user')
 export default class UserEntity extends TypeormEntity<User> {

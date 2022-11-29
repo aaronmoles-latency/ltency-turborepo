@@ -1,6 +1,6 @@
 import RoleId from '../../role/domain/role-id';
-import UserId from './user-id';
-import UserName from './user-name';
+import UserId from './value-object/user-id';
+import UserName from './value-object/user-name';
 
 export default class User {
 	static create(id: string, name: string, roleId: string) {

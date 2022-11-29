@@ -1,5 +1,6 @@
 import { Service } from '../../shared/decorators/service.decorator';
-import UserDto from '../domain/user.dto';
+import { UserDtoAdapter } from '../domain/dto/user.adapter';
+import UserDto from '../domain/dto/user.dto';
 import { UserRepository } from '../domain/user.repository';
 
 @Service()
@@ -11,10 +12,6 @@ export default class ListUsers {
 
 	async execute(): Promise<UserDto[]> {
 		return this.userRepository.findAll()
-			.then((result) => result.map((user) => ({
-				id: user.id.value,
-				name: user.name.value,
-				roleId: user.roleId.value,
-			})));
+			.then((result) => result.map(UserDtoAdapter));
 	}
 }

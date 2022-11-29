@@ -3,8 +3,8 @@ import { EntitySchema } from 'typeorm';
 
 import RoleId from '../../../role/domain/role-id';
 import { ValueObjectTransformer } from '../../../shared/persistence/value-object.transformer';
-import UserId from '../../domain/user-id';
-import UserName from '../../domain/user-name';
+import UserId from '../../domain/value-object/user-id';
+import UserName from '../../domain/value-object/user-name';
 
 export const UserEntitySchema = new EntitySchema<unknown>({
 	name: 'user',
