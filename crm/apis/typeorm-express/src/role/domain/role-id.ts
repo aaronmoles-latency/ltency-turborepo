@@ -1,4 +1,4 @@
-import { Uuid } from '../../shared/domain/value-object/uuid';
+import { Uuid } from '@latency/domain';
 
 export default class RoleId extends Uuid {
 	constructor(value: string) {

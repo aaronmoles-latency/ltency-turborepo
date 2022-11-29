@@ -1,6 +1,6 @@
+import { AggregateRoot } from '@latency/domain';
 import { DataSource, EntityTarget, Repository } from 'typeorm';
 
-import { AggregateRoot } from '../domain/aggregate-root';
 import { TypeormEntity } from './typeorm.entity';
 
 export abstract class TypeOrmRepository<M extends AggregateRoot, E extends TypeormEntity<M>> {

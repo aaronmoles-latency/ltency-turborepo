@@ -11,7 +11,7 @@ export const AppDataSource = new DataSource({
 	password: 'password',
 	database: 'latency',
 	synchronize: false,
-	logging: true,
+	logging: false,
 	entities: ['./**/infrastructure/persistence/*.entity.{ts,js}'],
 	subscribers: [],
 	migrations: ['migrations/**/*{.ts,.js}'],

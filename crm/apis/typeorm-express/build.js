@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/value-object node
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 const {esbuildPluginDecorator} = require('esbuild-plugin-decorator');

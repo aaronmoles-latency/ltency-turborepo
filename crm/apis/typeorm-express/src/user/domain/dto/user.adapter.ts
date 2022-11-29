@@ -1,4 +1,5 @@
-import { Adapter } from '../../../shared/adapter';
+import { Adapter } from '@latency/domain';
+
 import User from '../user';
 import UserDto from './user.dto';
 

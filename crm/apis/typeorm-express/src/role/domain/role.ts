@@ -1,4 +1,5 @@
-import { AggregateRoot } from '../../shared/domain/aggregate-root';
+import { AggregateRoot } from '@latency/domain';
+
 import RoleId from './role-id';
 
 export default class Role extends AggregateRoot {
