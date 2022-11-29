@@ -1,19 +1,20 @@
-import { DataSource, EntitySchema, Repository } from 'typeorm';
+import { DataSource, EntityTarget, Repository } from 'typeorm';
 
 import { AggregateRoot } from '../domain/aggregate-root';
+import { TypeormEntity } from './typeorm.entity';
 
-export abstract class TypeOrmRepository<T extends AggregateRoot> {
+export abstract class TypeOrmRepository<M extends AggregateRoot, E extends TypeormEntity<M>> {
 	protected constructor(
 		private readonly dataSource: DataSource,
-		private readonly schema: EntitySchema<T>,
+		private readonly entity: EntityTarget<E>,
 	) {}
 
-	protected repository(): Repository<T> {
-		return this.dataSource.getRepository(this.schema);
+	protected repository(): Repository<E> {
+		return this.dataSource.getRepository(this.entity);
 	}
 
-	protected async persist(aggregateRoot: T): Promise<void> {
+	protected async persist(entity: E): Promise<void> {
 		const repository = await this.repository();
-		await repository.save(aggregateRoot as any);
+		await repository.save(entity);
 	}
 }

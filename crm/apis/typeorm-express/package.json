@@ -9,8 +9,9 @@
     "build": "node build.js",
     "test": "NODE_ENV=test jest",
     "clean": "rm -r dist",
-		"migration:generate": "npx typeorm-ts-node-esm migration:generate migrations/$NAME -d ./src/database.ts",
-		"migration:create": "npx typeorm-ts-node-esm migration:create migrations/$NAME -d ./src/database.ts",
+		"migration:check": "npx typeorm-ts-node-esm migration:generate migrations/check -d ./src/database.ts --check",
+		"migration:generate": "npx typeorm-ts-node-esm migration:generate migrations/Migration -d ./src/database.ts",
+		"migration:create": "npx typeorm-ts-node-esm migration:create migrations/ManualMigration -d ./src/database.ts",
 		"migration:run": "npx typeorm-ts-node-esm migration:run -d ./src/database.ts",
 		"migration:revert": "npx typeorm-ts-node-esm migration:revert -d ./src/database.ts"
   },
@@ -19,8 +20,6 @@
   "dependencies": {
     "@latency/express-server": "*",
     "diod": "2.0.0",
-    "firebase-admin": "^11.3.0",
-    "jsonwebtoken": "8.5.1",
     "pg": "8.8.0",
     "reflect-metadata": "0.1.13",
     "typeorm": "0.3.10",
