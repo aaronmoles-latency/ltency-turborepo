@@ -52,7 +52,7 @@ export const ProtectedPage: React.FC = () => {
 							<strong>Only authenticated users can access this page.</strong>
 						</span>
 					</p>
-					<CodeSnippet title="Protected Message" code={message} />
+					<CodeSnippet title="Protected Event" code={message} />
 				</div>
 			</div>
 		</PageLayout>

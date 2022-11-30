@@ -1,3 +1,6 @@
 export * from './adapter'
+export * from './assert-never'
+export * from './is-null-or-undefined'
 export * from './newable-class'
 export * from './optional'
+export * from './primitiveType'

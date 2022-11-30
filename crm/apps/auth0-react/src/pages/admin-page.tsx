@@ -55,7 +55,7 @@ export const AdminPage: React.FC = () => {
 							</strong>
 						</span>
 					</p>
-					<CodeSnippet title="Admin Message" code={message} />
+					<CodeSnippet title="Admin Event" code={message} />
 				</div>
 			</div>
 		</PageLayout>

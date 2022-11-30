@@ -1,8 +1,7 @@
+import { PrimitiveType } from '../core';
 import { InvalidArgumentError } from '../error';
 
-export type Primitives = string | number |boolean | Date;
-
-export abstract class ValueObject<T extends Primitives> {
+export abstract class ValueObject<T extends PrimitiveType> {
 	private readonly _value: T;
 
 	constructor(value: T) {

@@ -1,7 +1,7 @@
-#!/usr/bin/value-object node
+#!/usr/bin/event node
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const {esbuildPluginDecorator} = require('esbuild-plugin-decorator');
+const { esbuildPluginDecorator } = require('esbuild-plugin-decorator');
 
 require('esbuild')
 	.build({

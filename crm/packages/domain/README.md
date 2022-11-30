@@ -78,6 +78,15 @@ export default class User extends AggregateRoot {
 ### Domain Event
 
 ```tsx
+class UserCreatedDomainEvent extends DomainEvent<Primitives<User>> {
+	constructor(aggregateId: Uuid, attributes: Primitives<User>) {
+		super(
+			EventName.domainEvent('test', 'user', 'created'),
+			aggregateId,
+			attributes,
+		);
+	}
+}
 ```
 
 ---

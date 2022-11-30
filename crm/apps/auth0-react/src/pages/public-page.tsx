@@ -48,7 +48,7 @@ export const PublicPage: React.FC = () => {
 							<strong>Any visitor can access this page.</strong>
 						</span>
 					</p>
-					<CodeSnippet title="Public Message" code={message} />
+					<CodeSnippet title="Public Event" code={message} />
 				</div>
 			</div>
 		</PageLayout>
