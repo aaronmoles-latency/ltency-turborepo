@@ -1,25 +1,40 @@
 /* eslint-disable no-console */
 import 'reflect-metadata';
 
+import { Env, EnvType } from '@latency/express-server';
 import { DataSource } from 'typeorm';
+import { MixedList } from 'typeorm/common/MixedList';
 
-import { RoleEntity } from './role/infrastructure/persistence/role.entity';
-import UserEntity from './user/infrastructure/persistence/user.entity';
+import { container } from './container';
 
-export const AppDataSource = new DataSource({
-	type: 'postgres',
-	host: 'localhost',
-	// host: 'host.docker.internal',
-	port: 5432,
-	username: 'latency',
-	password: 'password',
-	database: 'latency',
-	synchronize: false,
-	logging: false,
-	entities: [UserEntity, RoleEntity],
-	// entities: ['./**/infrastructure/persistence/*.entity.{ts,js}'],
-	subscribers: [],
-	migrations: ['migrations/**/*{.ts,.js}'],
-	maxQueryExecutionTime: 1000,
-	migrationsRun: true,
-})
+export interface DataSourceConfigEnv extends EnvType {
+	DB_HOST: string,
+	DB_PORT: string,
+	DB_USER: string,
+	DB_PASS: string,
+	DB_NAME: string,
+}
+
+export class DataSourceFactory {
+	static create(env: Env<DataSourceConfigEnv>, entities: MixedList<Function>): DataSource {
+		return new DataSource({
+			type: 'postgres',
+			host: env.get('DB_HOST'),
+			// host: 'host.docker.internal',
+			port: Number(env.get('DB_PORT')),
+			username: env.get('DB_USER'),
+			password: env.get('DB_PASS'),
+			database: env.get('DB_NAME'),
+			synchronize: false,
+			logging: false,
+			entities,
+			// entities: ['./**/infrastructure/persistence/*.entity.{ts,js}'],
+			subscribers: [],
+			migrations: ['migrations/**/*{.ts,.js}'],
+			maxQueryExecutionTime: 1000,
+			migrationsRun: true,
+		})
+	}
+}
+
+export const AppDataSource = container.get(DataSource)

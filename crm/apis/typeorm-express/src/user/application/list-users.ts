@@ -16,7 +16,6 @@ export default class ListUsers {
 
 	async execute(): Promise<UserDto[]> {
 		// eslint-disable-next-line no-console
-		console.warn('DB_HOST', this.env.get('DB_HOST'));
 		return this.userRepository.findAll()
 			.then((result) => result.map(UserDtoAdapter));
 	}

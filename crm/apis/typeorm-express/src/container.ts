@@ -2,7 +2,7 @@ import { Env, Logger } from '@latency/express-server';
 import { ContainerBuilder } from 'diod';
 import { DataSource } from 'typeorm';
 
-import { AppDataSource } from './database';
+import { DataSourceConfigEnv, DataSourceFactory } from './database';
 import { DiContainer } from './shared/di/diContainer';
 import SystemLogger from './shared/system.logger';
 import TypeormExpressEnv from './typeorm-express.env';
@@ -13,5 +13,10 @@ const modules = [UserModule];
 export const container = DiContainer(modules, (builder: ContainerBuilder) => {
 	builder.register(Logger).use(SystemLogger);
 	builder.register(Env).useInstance(new TypeormExpressEnv());
-	builder.register(DataSource).useInstance(AppDataSource)
+	builder.register(DataSource).useFactory((container) => {
+		return DataSourceFactory.create(
+			container.get(Env<DataSourceConfigEnv>),
+			modules.flatMap((module) => module.ENTITIES),
+		)
+	}).asSingleton()
 });
