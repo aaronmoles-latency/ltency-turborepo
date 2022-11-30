@@ -4,27 +4,32 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-		"lint": "eslint . --fix"
+    "test": "NODE_ENV=test jest",
+    "lint": "eslint . --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-		"uuid": "9.0.0"
+    "uuid": "9.0.0"
   },
   "devDependencies": {
-		"eslint-config-custom": "*",
-		"tsconfig": "*"
-  },
-	"jest": {
-		"rootDir": "tests",
-		"testRegex": ".*\\.spec\\.ts$",
-		"transform": {
-			"^.+\\.tsx?$": "esbuild-jest"
-		},
-		"testEnvironment": "node",
-		"coverageDirectory": "./../coverage",
-		"cacheDirectory": "./../tmp/jestCache"
-	}
+		"@types/jest": "29.2.3",
+		"@types/uuid": "8.3.4",
+		"esbuild-jest": "0.5.0",
+    "eslint-config-custom": "*",
+    "jest": "29.3.1",
+    "tsconfig": "*"
+	},
+  "jest": {
+    "rootDir": "tests",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.tsx?$": "esbuild-jest"
+    },
+    "testEnvironment": "node",
+    "coverageDirectory": "./../coverage",
+    "cacheDirectory": "./../tmp/jestCache",
+		"maxConcurrency": 1
+  }
 }
