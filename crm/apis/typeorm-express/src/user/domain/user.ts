@@ -1,8 +1,10 @@
+import { AggregateRoot } from '@latency/domain';
+
 import RoleId from '../../role/domain/role-id';
 import UserId from './value-object/user-id';
 import UserName from './value-object/user-name';
 
-export default class User {
+export default class User extends AggregateRoot {
 	static create(id: string, name: string, roleId: string) {
 		return new User(
 			new UserId(id),
@@ -16,6 +18,7 @@ export default class User {
 		private _name: UserName,
 		private _roleId: RoleId,
 	) {
+		super()
 	}
 
 	get id(): UserId {

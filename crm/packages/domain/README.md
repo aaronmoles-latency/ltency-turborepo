@@ -1,41 +1,83 @@
-# 📤 express-server
+# 💭 @latency/domain
 
-Easy mode to create a fast and simply api. Basically is an abstraction of Express server.
+All domain objects needed to start to develop your project.
+This package contains base to your **Value Objects**, **Aggregate Root**, **Domain Events** and more.
 
 ---
 
 ## ⚙️ How to Install
 
 ```bash
-npm install @latency/express-event
+npm install @latency/domain
 ```
 
 ---
 
 ## 👀 How to use
 
-To use this library previously we need to create a `CustomDotEnv`. It consists on create a class that extends of `DotEnv<Env>`.
+We only need to extend of class that need.
 
+### Value Object
 ```tsx
-import { Request, Response, Router } from 'express';
-import { Env, Logger, Server } from '@latency/express-server';
+import { StringValueObject } from '@latency/domain';
 
-const registerRoutes = (router: Router) => {
-	router.get('/path', (req: Request, res: Response) => {
-		res.send({ body: 'success' })
-	});
+class NameValueObject extends StringValueObject {
+
+}
+```
+
+### Uuid Value Object
+```tsx
+import { Uuid } from '@latency/domain';
+
+class UuidValueObject extends Uuid {
+
+}
+```
+
+### Enumeration Value Object
+```tsx
+import { EnumValueObject, InvalidArgumentError } from '@latency/domain';
+
+enum Vehicle {
+	CAR = 'CAR',
+	MOTO = 'MOTO',
+	BIKE = 'BIKE',
 }
 
-const logger = new SystemLogger();
-const envService = new CustomDotEnv();
+class VehicleValueObject extends EnumValueObject<Vehicle> {
+	constructor(value: Vehicle) {
+		super(value, Object.values(Vehicle));
+	}
 
-const server = new Server({
-	logger,
-	envService,
-	registerRoutes,
-});
+	protected throwErrorForInvalidValue(value: Vehicle): void {
+		throw new InvalidArgumentError(`${value} is not valid value to ${this.constructor.name}`)
+	}
+}
+```
 
-this.server.listen();
+### Aggregate Root
+```tsx
+import { AggregateRoot } from '@latency/domain';
+
+import RoleId from '../../role/domain/role-id';
+import UserId from './value-object/user-id';
+import UserName from './value-object/user-name';
+
+export default class User extends AggregateRoot {
+	constructor(
+		private readonly _id: UserId,
+		private readonly _name: UserName,
+		private readonly _roleId: RoleId,
+	) {
+		super()
+	}
+}
+```
+
+### Domain Event
+
+```tsx
 ```
 
 ---

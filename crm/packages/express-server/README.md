@@ -1,4 +1,4 @@
-# 📤 express-server
+# 📤 @latency/express-server
 
 Easy mode to create a fast and simply api. Basically is an abstraction of Express server.
 
