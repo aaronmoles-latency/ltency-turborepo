@@ -8,7 +8,8 @@ import UserEntity from './user/infrastructure/persistence/user.entity';
 
 export const AppDataSource = new DataSource({
 	type: 'postgres',
-	host: 'host.docker.internal',
+	host: 'localhost',
+	// host: 'host.docker.internal',
 	port: 5432,
 	username: 'latency',
 	password: 'password',

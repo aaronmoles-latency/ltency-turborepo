@@ -7,13 +7,11 @@ export abstract class BaseEnv<K extends EnvType> implements Env<K> {
 		this.env = env;
 	}
 
-	public get(key: keyof K): string {
+	public get(key: keyof K): K[keyof K] {
 		return this.env[key];
 	}
 
-	public set(key: keyof K, value: string) {
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
+	public set(key: keyof K, value: K[keyof K]) {
 		this.env[key] = value;
 	}
 }

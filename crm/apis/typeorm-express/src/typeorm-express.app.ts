@@ -3,6 +3,7 @@ import { DataSource } from 'typeorm';
 
 import { container } from './container';
 import { registerControllers as registerRoutes } from './routes';
+import TypeormExpressEnv from './typeorm-express.env';
 
 export class TypeormExpressApp {
 	server?: Server;
@@ -25,7 +26,7 @@ export class TypeormExpressApp {
 
 	async startServer() {
 		const logger = container.get(Logger);
-		const envService = container.get(Env);
+		const envService = container.get(Env) as TypeormExpressEnv;
 		this.server = new Server({
 			logger,
 			envService,

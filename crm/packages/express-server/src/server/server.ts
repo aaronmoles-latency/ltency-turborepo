@@ -7,12 +7,12 @@ import helmet from 'helmet';
 import * as http from 'http';
 import httpStatus from 'http-status';
 
-import { Env, EnvType } from '../env';
+import { Env, ServerEnv } from '../env';
 import { Logger } from '../logger';
 
 export interface ServerConfig {
 	logger: Logger,
-	envService: Env<EnvType>,
+	envService: Env<ServerEnv>,
 	registerRoutes: (router: ExpressRouter) => void
 }
 
