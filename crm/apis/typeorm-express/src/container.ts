@@ -1,4 +1,4 @@
-import { Env, Logger, ServerEnv } from '@latency/express-server';
+import { Env, Logger } from '@latency/express-server';
 import { ContainerBuilder } from 'diod';
 import { DataSource } from 'typeorm';
 
@@ -12,6 +12,6 @@ const modules = [UserModule];
 
 export const container = DiContainer(modules, (builder: ContainerBuilder) => {
 	builder.register(Logger).use(SystemLogger);
-	builder.register(Env<ServerEnv>).useInstance(new TypeormExpressEnv());
+	builder.register(Env).useInstance(new TypeormExpressEnv());
 	builder.register(DataSource).useInstance(AppDataSource)
 });
