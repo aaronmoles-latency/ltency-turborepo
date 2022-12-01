@@ -1,4 +1,6 @@
-import { Env, Logger, Server } from '@latency/express-server';
+import { Logger } from '@latency/core';
+import { Env } from '@latency/env';
+import { Server, ServerEnvType } from '@latency/express-server';
 
 import { container } from './container';
 import { registerControllers as registerRoutes } from './routes';
@@ -8,7 +10,7 @@ export class LatencyExpressApp {
 
 	async start() {
 		const logger = container.get(Logger);
-		const envService = container.get(Env);
+		const envService = container.get(Env<ServerEnvType>);
 		this.server = new Server({
 			logger,
 			envService,

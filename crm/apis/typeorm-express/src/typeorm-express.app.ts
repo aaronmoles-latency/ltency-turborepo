@@ -1,10 +1,10 @@
 import { Logger } from '@latency/core';
-import { Env, Server } from '@latency/express-server';
+import { Env } from '@latency/env';
+import { Server, ServerEnvType } from '@latency/express-server';
 import { DataSource } from 'typeorm';
 
 import { container } from './container';
 import { registerControllers as registerRoutes } from './routes';
-import TypeormExpressEnv from './typeorm-express.env';
 
 export class TypeormExpressApp {
 	server?: Server;
@@ -27,7 +27,7 @@ export class TypeormExpressApp {
 
 	async startServer() {
 		const logger = container.get(Logger);
-		const envService = container.get(Env) as TypeormExpressEnv;
+		const envService = container.get(Env<ServerEnvType>);
 		this.server = new Server({
 			logger,
 			envService,

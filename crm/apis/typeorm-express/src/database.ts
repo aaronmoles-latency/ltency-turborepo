@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import 'reflect-metadata';
 
-import { Env, EnvType } from '@latency/express-server';
+import { Env, EnvType } from '@latency/env';
 import { DataSource } from 'typeorm';
 import { MixedList } from 'typeorm/common/MixedList';
 

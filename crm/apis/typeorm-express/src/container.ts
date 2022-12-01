@@ -1,5 +1,5 @@
 import { Logger, SystemLogger } from '@latency/core';
-import { Env } from '@latency/express-server';
+import { Env } from '@latency/env';
 import { ContainerBuilder } from 'diod';
 import { DataSource } from 'typeorm';
 

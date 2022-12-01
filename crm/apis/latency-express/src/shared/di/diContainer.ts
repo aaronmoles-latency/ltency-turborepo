@@ -1,13 +1,13 @@
 import 'reflect-metadata';
 
+import { NewableClass } from '@latency/core';
 import { Container, ContainerBuilder } from 'diod';
 
 import { Module } from '../module';
-import { NewableClass } from '../newable-class';
 
 function registerModules(
 	modules: NewableClass<Module>[],
-	builder: ContainerBuilder
+	builder: ContainerBuilder,
 ) {
 	modules.forEach((module) => {
 		const moduleInstance = Reflect.construct<[], Module>(module, []);
@@ -17,7 +17,7 @@ function registerModules(
 
 export function DiContainer(
 	modules: NewableClass<Module>[],
-	register: (builder: ContainerBuilder) => void
+	register: (builder: ContainerBuilder) => void,
 ): Container {
 	const builder = new ContainerBuilder();
 
@@ -28,7 +28,7 @@ export function DiContainer(
 }
 
 export function DiTestContainer(
-	register: (builder: ContainerBuilder) => void
+	register: (builder: ContainerBuilder) => void,
 ): Container {
 	const builder = new ContainerBuilder();
 
