@@ -7,7 +7,7 @@ import { MixedList } from 'typeorm/common/MixedList';
 
 import { container } from './container';
 
-export interface DataSourceConfigEnv extends EnvType {
+export interface DatabaseConfigEnv extends EnvType {
 	DB_HOST: string,
 	DB_PORT: string,
 	DB_USER: string,
@@ -16,7 +16,7 @@ export interface DataSourceConfigEnv extends EnvType {
 }
 
 export class DataSourceFactory {
-	static create(env: Env<DataSourceConfigEnv>, entities: MixedList<Function>): DataSource {
+	static create(env: Env<DatabaseConfigEnv>, entities: MixedList<Function>): DataSource {
 		return new DataSource({
 			type: 'postgres',
 			host: env.get('DB_HOST'),

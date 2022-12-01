@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import { NewableClass } from '@latency/domain';
+import { NewableClass } from '@latency/core';
 import { Container, ContainerBuilder } from 'diod';
 
 import { Module } from '../module';

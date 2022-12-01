@@ -1,9 +1,9 @@
-import { DotEnv, ServerEnv } from '@latency/express-server';
+import { DotEnv, ServerEnvType } from '@latency/express-server';
 
-import { DataSourceConfigEnv } from './database';
+import { DatabaseConfigEnv } from './database';
 import { Service } from './shared/decorators/service.decorator';
 
-export interface TypeOrmExpressEnv extends ServerEnv, DataSourceConfigEnv {
+export interface TypeOrmExpressEnv extends ServerEnvType, DatabaseConfigEnv {
 
 }
 

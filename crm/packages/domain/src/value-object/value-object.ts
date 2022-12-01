@@ -1,4 +1,5 @@
-import { PrimitiveType } from '../core';
+import { PrimitiveType } from '@latency/core';
+
 import { InvalidArgumentError } from '../error';
 
 export abstract class ValueObject<T extends PrimitiveType> {

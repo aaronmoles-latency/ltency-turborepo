@@ -1,10 +1,7 @@
 /* eslint-disable no-console */
-import { Logger } from '@latency/express-server';
+import { Logger } from './logger';
 
-import { Service } from './decorators/service.decorator';
-
-@Service()
-export default class SystemLogger implements Logger {
+export class SystemLogger implements Logger {
 	debug(message: string): void {
 		console.debug(message);
 	}

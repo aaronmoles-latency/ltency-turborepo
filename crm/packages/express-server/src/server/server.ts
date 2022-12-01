@@ -1,3 +1,4 @@
+import { Logger } from '@latency/core';
 import bodyParser from 'body-parser';
 import compress from 'compression';
 import cors from 'cors';
@@ -7,12 +8,11 @@ import helmet from 'helmet';
 import * as http from 'http';
 import httpStatus from 'http-status';
 
-import { Env, ServerEnv } from '../env';
-import { Logger } from '../logger';
+import { Env, ServerEnvType } from '../env';
 
 export interface ServerConfig {
 	logger: Logger,
-	envService: Env<ServerEnv>,
+	envService: Env<ServerEnvType>,
 	registerRoutes: (router: ExpressRouter) => void
 }
 

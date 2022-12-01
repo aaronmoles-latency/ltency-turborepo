@@ -1,5 +1,5 @@
 import { EnvType } from './env';
 
-export interface ServerEnv extends EnvType {
+export interface ServerEnvType extends EnvType {
 	PORT: string,
 }

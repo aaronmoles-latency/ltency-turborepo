@@ -1,5 +1,4 @@
 import { NumberValueObject } from '../../src';
-import { InvalidArgumentError } from '../../src/error';
 
 class CountValueObject extends NumberValueObject {
 

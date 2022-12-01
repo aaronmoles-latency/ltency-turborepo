@@ -1,4 +1,4 @@
-import { Adapter } from '../../src';
+import { Adapter } from '../src';
 
 type Input = {
 	id: number,

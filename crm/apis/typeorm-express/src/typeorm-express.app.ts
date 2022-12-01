@@ -1,4 +1,5 @@
-import { Env, Logger, Server } from '@latency/express-server';
+import { Logger } from '@latency/core';
+import { Env, Server } from '@latency/express-server';
 import { DataSource } from 'typeorm';
 
 import { container } from './container';

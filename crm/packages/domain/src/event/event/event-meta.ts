@@ -1,4 +1,4 @@
-import { PrimitiveType } from '../../core';
+import { PrimitiveType } from '@latency/core';
 
 export type EventMetaKey = 'requestId'|'correlationId'|'replyTo'|'originUserId'|string;
 
