@@ -1,14 +1,15 @@
-# 💭 @latency/domain
+# 💭 @latency/core
 
-All domain objects needed to start to develop your project.
-This package contains base to your **Value Objects**, **Aggregate Root**, **Domain Events** and more.
+All core functions and utilities shared across all packages.
+
+
 
 ---
 
 ## ⚙️ How to Install
 
 ```bash
-npm install @latency/domain
+npm install @latency/core
 ```
 
 ---
@@ -17,78 +18,82 @@ npm install @latency/domain
 
 We only need to extend of class that need.
 
-### Value Object
+### `Adapter`
+Adapt objects between types.
 ```tsx
-import { StringValueObject } from '@latency/domain';
+import { Adapter } from '@latency/core';
+import User from '../user';
+import UserDto from './user.dto';
 
-class NameValueObject extends StringValueObject {
+export const UserDtoAdapter = Adapter<User, UserDto>((user) => ({
+	id: user.id.value,
+	name: user.name.value,
+	roleId: user.roleId.value,
+}))
+```
 
+### `assertNever`
+Preserve enum types on switches.
+```tsx
+switch (type) {
+	case Vehicle.CAR:
+    	...
+		break;
+	case Vehicle.MOTO:
+    	...
+		break;
+	default:
+    	assertNever(type)
 }
 ```
 
-### Uuid Value Object
+### `isNullOrUndefined`
 ```tsx
-import { Uuid } from '@latency/domain';
+const a = undefined;
 
-class UuidValueObject extends Uuid {
-
-}
+isNullOrUndefined(a)
 ```
 
-### Enumeration Value Object
+### `Optional`
+Set property like value or `undefined`.
 ```tsx
-import { EnumValueObject, InvalidArgumentError } from '@latency/domain';
-
-enum Vehicle {
-	CAR = 'CAR',
-	MOTO = 'MOTO',
-	BIKE = 'BIKE',
-}
-
-class VehicleValueObject extends EnumValueObject<Vehicle> {
-	constructor(value: Vehicle) {
-		super(value, Object.values(Vehicle));
-	}
-
-	protected throwErrorForInvalidValue(value: Vehicle): void {
-		throw new InvalidArgumentError(`${value} is not valid value to ${this.constructor.name}`)
-	}
-}
-```
-
-### Aggregate Root
-```tsx
-import { AggregateRoot } from '@latency/domain';
-
-import RoleId from '../../role/domain/role-id';
-import UserId from './value-object/user-id';
-import UserName from './value-object/user-name';
-
-export default class User extends AggregateRoot {
+export class User {
 	constructor(
-		private readonly _id: UserId,
-		private readonly _name: UserName,
-		private readonly _roleId: RoleId,
+    	readonly id: number,
+		readonly name: Optional<string>,
 	) {
-		super()
 	}
 }
 ```
 
-### Domain Event
-
+### `PrimitiveType`
+Define Typescript primitive types.
 ```tsx
-class UserCreatedDomainEvent extends DomainEvent<Primitives<User>> {
-	constructor(aggregateId: Uuid, attributes: Primitives<User>) {
-		super(
-			EventName.domainEvent('test', 'user', 'created'),
-			aggregateId,
-			attributes,
-		);
-	}
+type NewType = PrimitiveType;
+```
+
+### `Primitives<T>`
+Extract all properties of class and convert to type with all values like a primitives.
+
+Note: each property should be public. In other case, it not detects properties.
+```tsx
+import { PrimitiveType } from '@latency/core';
+
+type property = PrimitiveType;
+
+const userPrimitives: Primitives<User> = {
+	id: '',
+	name: '',
 }
 ```
 
----
+### `Logger`
+Interface to share common interface methods:
+- `log`
+- `debug`
+- `error`
+```tsx
+const logger = new SystemLogger()
+```
 
-## 🔁 Dependencies
+

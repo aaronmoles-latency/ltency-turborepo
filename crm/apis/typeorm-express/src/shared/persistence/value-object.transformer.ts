@@ -1,4 +1,5 @@
-import { NewableClass, PrimitiveType, ValueObject } from '@latency/domain';
+import { NewableClass, PrimitiveType } from '@latency/core';
+import { ValueObject } from '@latency/domain';
 
 export const ValueObjectTransformer = <T extends PrimitiveType>(ValueObject: NewableClass<ValueObject<never>>) => {
 	return {

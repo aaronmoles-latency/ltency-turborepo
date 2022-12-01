@@ -10,7 +10,6 @@ export class ProcessEnv<K extends EnvType> extends BaseEnv<K> {
 		for (const key of envKeys) {
 			const value = process.env[key] as K[keyof K];
 
-			// console.log('KEY', key, 'VALUE', value, super.get(key));
 			if (value) {
 				super.set(key as keyof K, value)
 			} else if (!super.get(key as keyof K)) {

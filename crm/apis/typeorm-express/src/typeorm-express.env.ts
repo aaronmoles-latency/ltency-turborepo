@@ -4,7 +4,7 @@ import { DatabaseConfigEnv } from './database';
 import { Service } from './shared/decorators/service.decorator';
 
 export interface TypeOrmExpressEnv extends ServerEnvType, DatabaseConfigEnv {
-
+	PEPITO: string,
 }
 
 @Service()
@@ -18,6 +18,7 @@ export default class TypeormExpressEnv extends DotEnv<TypeOrmExpressEnv> {
 			DB_USER: '',
 			DB_PASS: '',
 			DB_NAME: '',
+			PEPITO: '',
 		});
 	}
 }

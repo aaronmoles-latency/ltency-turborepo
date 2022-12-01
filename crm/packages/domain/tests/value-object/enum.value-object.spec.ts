@@ -1,5 +1,4 @@
-import { EnumValueObject } from '../../src';
-import { InvalidArgumentError } from '../../src/error';
+import { EnumValueObject, InvalidArgumentError } from '../../src';
 
 enum Vehicle {
 	CAR = 'CAR',

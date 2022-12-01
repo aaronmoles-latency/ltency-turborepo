@@ -1,5 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
-import { DomainEvent, EventName, Primitives, Uuid } from '../../src';
+import { Primitives } from '@latency/core';
+
+import { DomainEvent, EventName, Uuid } from '../../src';
 
 class User {
 	constructor(
