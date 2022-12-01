@@ -5,7 +5,7 @@ module.exports = {
 	overrides: [
 		{
 			files: ["src/*/**/*.ts"],
-			excludedFiles: ["**/*.module.ts", "**/__shared__/**"],
+			excludedFiles: ["**/*.module.ts", "**/shared/**"],
 			rules: {
 				"hexagonal-architecture/enforce": ["error"],
 			},

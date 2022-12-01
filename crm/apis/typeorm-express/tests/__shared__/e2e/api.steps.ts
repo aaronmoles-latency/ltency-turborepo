@@ -52,7 +52,6 @@ Given('I authenticate request with token {string}', (token: string) => {
 });
 
 Then('the response status code should be {int}', async (status: number) => {
-	console.log(_request);
 	_response = await _request.expect(status);
 });
 
