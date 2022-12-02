@@ -1,6 +1,6 @@
+import { TypeormEntity } from '@latency/typeorm';
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-import { TypeormEntity } from '../../../shared/persistence/typeorm.entity';
 import Role from '../../domain/role';
 import RoleId from '../../domain/role-id';
 

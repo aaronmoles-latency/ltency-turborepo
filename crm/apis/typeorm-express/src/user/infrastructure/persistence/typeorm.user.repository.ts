@@ -1,7 +1,7 @@
+import { TypeOrmRepository } from '@latency/typeorm';
 import { DataSource } from 'typeorm';
 
 import { Repository } from '../../../shared/decorators/repository.decorator';
-import { TypeOrmRepository } from '../../../shared/persistence/typeorm.repository';
 import User from '../../domain/user';
 import { UserRepository } from '../../domain/user.repository';
 import UserEntity from './user.entity';

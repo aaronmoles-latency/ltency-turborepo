@@ -1,10 +1,10 @@
 import { DotEnv } from '@latency/env';
 import { ServerEnvType } from '@latency/express-server';
+import { TypeormConfigEnv } from '@latency/typeorm';
 
-import { DatabaseConfigEnv } from './database';
 import { Service } from './shared/decorators/service.decorator';
 
-export interface TypeOrmExpressEnv extends ServerEnvType, DatabaseConfigEnv {
+export interface TypeOrmExpressEnv extends ServerEnvType, TypeormConfigEnv {
 }
 
 @Service()
@@ -13,11 +13,7 @@ export default class TypeormExpressEnv extends DotEnv<TypeOrmExpressEnv> {
 		super({
 			NODE_ENV: 'dev',
 			PORT: '3000',
-			DB_HOST: '',
-			DB_PORT: '',
-			DB_USER: '',
-			DB_PASS: '',
-			DB_NAME: '',
+			DB_URL: '',
 		});
 	}
 }

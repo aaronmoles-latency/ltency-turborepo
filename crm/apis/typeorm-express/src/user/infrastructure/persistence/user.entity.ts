@@ -1,9 +1,9 @@
 /* eslint-disable camelcase */
+import { TypeormEntity } from '@latency/typeorm';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 
 import RoleId from '../../../role/domain/role-id';
 import { RoleEntity } from '../../../role/infrastructure/persistence/role.entity';
-import { TypeormEntity } from '../../../shared/persistence/typeorm.entity';
 import User from '../../domain/user';
 import UserId from '../../domain/value-object/user-id';
 import UserName from '../../domain/value-object/user-name';
