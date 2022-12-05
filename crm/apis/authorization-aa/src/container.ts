@@ -3,11 +3,13 @@ import { Env } from '@latency/env';
 import { DataSource, TypeormConfigEnv, TypeormDatasourceFactory } from '@latency/typeorm';
 import { ContainerBuilder } from 'diod';
 
+import AuthModule from './auth/auth.module';
+import DealModule from './deal/deal.module';
 import { DiContainer } from './shared/di/diContainer';
 import TypeormExpressEnv from './typeorm-express.env';
 import UserModule from './user/user.module';
 
-const modules = [UserModule];
+const modules = [UserModule, DealModule, AuthModule];
 
 export const container = DiContainer(modules, (builder: ContainerBuilder) => {
 	builder.register(Logger).use(SystemLogger);

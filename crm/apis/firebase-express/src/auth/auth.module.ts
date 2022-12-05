@@ -10,6 +10,8 @@ import FirebaseAuthRepository from './infrastructure/repository/firebase.auth.re
 import JwtAccessTokenGenerator from './infrastructure/repository/jwt.access-token.generator';
 
 export default class AuthModule extends Module {
+	static ENTITIES = []
+
 	register(builder: ContainerBuilder): void {
 		builder.registerAndUse(AuthFirebaseController).addTag(DiTag.CONTROLLER);
 		builder.registerAndUse(AuthFirebaseAuthenticator);

@@ -17,4 +17,9 @@ export abstract class TypeOrmRepository<M extends AggregateRoot, E extends Typeo
 		const repository = await this.repository();
 		await repository.save(entity);
 	}
+
+	protected findAll(): Promise<M[]> {
+		return this.repository().find()
+			.then((entities) => entities.map((entity) => entity.toModel()));
+	}
 }

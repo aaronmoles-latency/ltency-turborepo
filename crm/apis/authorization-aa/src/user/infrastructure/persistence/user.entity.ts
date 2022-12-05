@@ -2,8 +2,8 @@
 import { TypeormEntity } from '@latency/typeorm';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 
-import RoleId from '../../../deal/domain/role-id';
-import { RoleEntity } from '../../../deal/infrastructure/persistence/role.entity';
+import DealId from '../../../deal/domain/deal-id';
+import { DealEntity } from '../../../deal/infrastructure/persistence/deal.entity';
 import User from '../../domain/user';
 import UserId from '../../domain/value-object/user-id';
 import UserName from '../../domain/value-object/user-name';
@@ -19,9 +19,9 @@ export default class UserEntity extends TypeormEntity<User> {
 	@Column({ type: 'uuid', name: 'role_id' })
 	private readonly roleId: string
 
-	@ManyToOne(() => RoleEntity)
+	@ManyToOne(() => DealEntity)
 	@JoinColumn({ name: 'role_id', referencedColumnName: 'id' })
-	private role!: RoleEntity
+	private role!: DealEntity
 
 	static fromUser(user: User) {
 		return new UserEntity(
@@ -42,7 +42,7 @@ export default class UserEntity extends TypeormEntity<User> {
 		return new User(
 			new UserId(this.id),
 			new UserName(this.name),
-			new RoleId(this.roleId),
+			new DealId(this.roleId),
 		);
 	}
 }

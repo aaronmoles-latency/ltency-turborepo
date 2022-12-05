@@ -1,6 +1,6 @@
 import { AggregateRoot } from '@latency/domain';
 
-import RoleId from '../../deal/domain/role-id';
+import DealId from '../../deal/domain/deal-id';
 import UserId from './value-object/user-id';
 import UserName from './value-object/user-name';
 
@@ -9,14 +9,14 @@ export default class User extends AggregateRoot {
 		return new User(
 			new UserId(id),
 			new UserName(name),
-			new RoleId(roleId),
+			new DealId(roleId),
 		)
 	}
 
 	constructor(
 		private _id: UserId,
 		private _name: UserName,
-		private _roleId: RoleId,
+		private _roleId: DealId,
 	) {
 		super()
 	}
@@ -29,7 +29,7 @@ export default class User extends AggregateRoot {
 		return this._name;
 	}
 
-	get roleId(): RoleId {
+	get roleId(): DealId {
 		return this._roleId;
 	}
 }

@@ -1,11 +1,11 @@
-import RoleId from '../../../src/deal/domain/role-id';
+import DealId from '../../../src/deal/domain/deal-id';
 
 export class RoleIdMother {
-	static create(value: string): RoleId {
-		return new RoleId(value)
+	static create(value: string): DealId {
+		return new DealId(value)
 	}
 
-	static random(): RoleId {
-		return RoleId.random()
+	static random(): DealId {
+		return DealId.random()
 	}
 }
