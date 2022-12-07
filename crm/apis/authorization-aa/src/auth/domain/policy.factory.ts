@@ -18,8 +18,8 @@ export default class PolicyFactory {
 				city: ['MAD'],
 			},
 			attributes: {
-				included: ['id', 'name', 'alias'],
-				excluded: ['fee'],
+				included: ['name', 'alias'],
+				// excluded: ['fee'],
 			},
 		})
 	}

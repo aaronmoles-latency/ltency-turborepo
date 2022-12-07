@@ -1,4 +1,5 @@
 import { EventName } from '@latency/domain';
+import { Notation } from 'notation';
 
 import { AuthorizationError } from '../domain/authorization.error';
 import { ObjectPolicy, UserPolicy } from '../domain/policy';
@@ -13,6 +14,19 @@ export default class Authorizer {
 			default:
 				throw new AuthorizationError('Action not defined')
 		}
+	}
+
+	filter(__name: EventName, userPolicy: UserPolicy, result: object): object {
+		const objectPolicy = PolicyFactory.createObject();
+		const notate = Notation.create;
+		const properties = [
+			...(objectPolicy.attributes?.included ? objectPolicy.attributes.included! : ['*']),
+			...(objectPolicy.attributes?.excluded ? objectPolicy.attributes.excluded!.map((attribute) => `!${attribute}`) : []),
+		];
+		if (Array.isArray(result)) {
+			return result.map((element) => notate(element).filter(properties).value)
+		}
+		return notate(result).filter(properties).value;
 	}
 
 	private checkDimensions(userPolicy: UserPolicy, objectPolicy: ObjectPolicy) {

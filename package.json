@@ -12,9 +12,9 @@
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "test": "turbo run test",
-		"deploy:infra": "docker-compose down && docker volume rm latency-turborepo_psql-db-data-test -f && docker-compose up -d postgres",
-		"prune:db": "docker-compose down && docker system prune -f --volumes && npm run deploy:infra"
-	},
+    "deploy:infra": "docker-compose down && docker volume rm latency-turborepo_psql-db-data-test -f && docker-compose up -d postgres",
+    "prune:db": "docker-compose down && docker system prune -f --volumes && npm run deploy:infra"
+  },
   "devDependencies": {
     "turbo": "latest"
   },
@@ -22,5 +22,7 @@
     "node": ">=19.0.0",
     "npm": ">=8.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "notation": "2.0.0"
+  }
 }

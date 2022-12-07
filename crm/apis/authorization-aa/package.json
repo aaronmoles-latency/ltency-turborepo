@@ -10,7 +10,7 @@
     "docker:build": "node build.js && docker build . -t latency/typeorm-express",
     "docker:run": "docker run -p 3000:3000 --rm latency/typeorm-express",
     "test": "NODE_ENV=test jest",
-		"lint": "eslint . --fix",
+    "lint": "eslint . --fix",
     "clean": "rm -r dist",
     "migration:check": "npx typeorm-ts-node-esm migration:generate migrations/check -d ./src/database.ts --check",
     "migration:generate": "npx typeorm-ts-node-esm migration:generate migrations/Migration -d ./src/database.ts",
@@ -25,6 +25,7 @@
     "@latency/express-server": "*",
     "@latency/typeorm": "*",
     "diod": "2.0.0",
+    "notation": "2.0.0",
     "reflect-metadata": "0.1.13"
   },
   "devDependencies": {

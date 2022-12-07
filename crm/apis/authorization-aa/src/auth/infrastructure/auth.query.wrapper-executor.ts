@@ -12,6 +12,8 @@ export default class AuthQueryWrapperExecutor implements WrapperExecutor<Query, 
 	async run(query: Query, next: () => Promise<unknown>): Promise<unknown> {
 		if (query instanceof AuthQuery) {
 			await this.authorizer.grant(query.__name, query.userPolicy)
+			const result = await next();
+			return this.authorizer.filter(query.__name, query.userPolicy, result as object)
 		}
 		return next();
 	}
