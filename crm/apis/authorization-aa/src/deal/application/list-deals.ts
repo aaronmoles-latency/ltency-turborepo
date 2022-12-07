@@ -1,36 +1,27 @@
-import { Uuid } from '@latency/domain';
-
-import AuthService from '../../auth/application/auth.service';
-import { authAdapter } from '../../auth/domain/auth.adapter';
-import AuthQuery from '../../auth/domain/auth.query';
-import { AuthAction } from '../../auth/domain/auth-action';
+import Authorizer from '../../auth/application/authorizer';
 import { Service } from '../../shared/decorators/service.decorator';
+import { QueryService } from '../../shared/use-case/service';
 import { dealAdapter } from '../domain/deal.adapter';
 import DealDto from '../domain/deal.dto';
 import { DealRepository } from '../domain/deal.repository';
+import ListDealsQuery from './list-deals.query';
 
 @Service()
-export default class ListDeals {
+export default class ListDeals implements QueryService<ListDealsQuery, DealDto[]> {
 	constructor(
 		private readonly dealRepository: DealRepository,
-		private readonly authService: AuthService,
+		private readonly authService: Authorizer,
 	) {
 	}
 
-	async execute(): Promise<DealDto[]> {
-		const policy = await this.authService.execute(
-			new AuthQuery(
-				Uuid.random(),
-				undefined,
-				AuthAction.fromString('latency.funnel.query.deal.list'),
-			),
+	async execute({ __name, userPolicy }: ListDealsQuery): Promise<DealDto[]> {
+		await this.authService.grant(
+			__name,
+			userPolicy,
 		)
-		if (policy.result !== 'GRANT') {
-			throw new Error('Unauthorized')
-		}
 
 		return this.dealRepository.findAll()
 			.then((deals) => deals.map(dealAdapter))
-			.then((deals) => deals.map(authAdapter<DealDto>(policy)))
+			// .then((deals) => deals.map(authAdapter<DealDto>(policy)))
 	}
 }

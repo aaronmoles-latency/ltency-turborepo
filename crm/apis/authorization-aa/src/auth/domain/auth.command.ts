@@ -1,14 +1,14 @@
 import { EventName } from '@latency/domain';
 
-import { Query } from '../../shared/use-case/query';
+import { Command } from '../../shared/use-case/command';
 import { UserPolicy } from './policy';
 
-export default class AuthQuery extends Query {
+export default class AuthCommand extends Command {
 	protected constructor(
-		action: EventName,
+		name: EventName,
 		private readonly _userPolicy: UserPolicy,
 	) {
-		super(action);
+		super(name);
 	}
 
 	get userPolicy(): UserPolicy {

@@ -40,23 +40,45 @@ export class EventName extends StringValueObject {
 		return this.create(service, EventType.DOMAIN_EVENT, entity, name, version)
 	}
 
+	static query(
+		service: string,
+		entity: string,
+		name: string,
+		version?: number,
+	): EventName {
+		return this.create(service, EventType.QUERY, entity, name, version)
+	}
+
+	static command(
+		service: string,
+		entity: string,
+		name: string,
+		version?: number,
+	): EventName {
+		return this.create(service, EventType.COMMAND, entity, name, version)
+	}
+
 	private constructor(value: string) {
 		super(value);
 	}
 
 	public getType(): EventType {
-		const type = this.value.split('.')[3];
-		if (!type) {
-			throw new Error(`Event name <${this.value}> has a invalid format`);
-		}
-		return type as EventType;
+		return this.getIndexValue(3) as EventType;
 	}
 
 	public getService(): string {
-		const service = this.value.split('.')[1];
-		if (!service) {
+		return this.getIndexValue(1);
+	}
+
+	public getEntity(): string {
+		return this.getIndexValue(4);
+	}
+
+	public getIndexValue(index: number): string {
+		const value = this.value.split('.')[index];
+		if (!value) {
 			throw new Error(`Event service <${this.value}> has a invalid format`);
 		}
-		return service;
+		return value;
 	}
 }

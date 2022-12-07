@@ -1,8 +1,11 @@
-type PolicyAttributes = { included?: string[], excluded?: string[] };
-type PolicyIds = { included?: string[], excluded?: string[] };
+type PolicyDimensions = Record<string, string[]>
+type PolicyIncludes = { included?: string[], excluded?: string[] };
 
-export default interface Policy {
-	result: 'GRANT'|'DENY',
-	attributes?: PolicyAttributes
-	ids?: PolicyIds
+export type UserPolicy = PolicyDimensions;
+
+export type ObjectPolicy = {
+	dimensions: PolicyDimensions,
+	attributes: PolicyIncludes
 }
+
+export type InstancePolicy = PolicyIncludes;

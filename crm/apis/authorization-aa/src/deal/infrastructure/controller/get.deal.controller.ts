@@ -1,8 +1,10 @@
 import { Request, Response } from 'express';
 
+import PolicyFactory from '../../../auth/domain/policy.factory';
 import Controller from '../../../shared/controller';
 import { GetController } from '../../../shared/decorators/controller.decorator';
 import DetailDeal from '../../application/detail-deal';
+import DetailDealQuery from '../../application/detail-deal.query';
 
 type GetDealControllerRequest = Request<{id: string}>
 
@@ -14,7 +16,9 @@ export default class GetDealController implements Controller {
 	}
 
 	async run(req: GetDealControllerRequest, res: Response): Promise<void> {
-		const deal = await this.detailDeal.execute(req.params.id)
+		const userPolicy = PolicyFactory.createUser();
+		const query = new DetailDealQuery(req.params.id, userPolicy)
+		const deal = await this.detailDeal.execute(query)
 
 		res.json(deal);
 	}
