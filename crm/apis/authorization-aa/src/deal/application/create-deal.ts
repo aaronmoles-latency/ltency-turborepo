@@ -1,6 +1,6 @@
 import Authorizer from '../../auth/application/authorizer';
+import CommandHandler from '../../shared/cqrs/domain/command/command-handler';
 import { Service } from '../../shared/decorators/service.decorator';
-import { CommandService } from '../../shared/use-case/service';
 import Deal from '../domain/deal';
 import { DealRepository } from '../domain/deal.repository';
 import DealAlias from '../domain/deal-alias';
@@ -10,14 +10,15 @@ import DealName from '../domain/deal-name';
 import CreateDealCommand from './create-deal.command';
 
 @Service()
-export default class CreateDeal implements CommandService<CreateDealCommand>{
+export default class CreateDeal extends CommandHandler<CreateDealCommand>{
 	constructor(
 		private readonly dealRepository: DealRepository,
 		private readonly authorizer: Authorizer,
 	) {
+		super(CreateDealCommand)
 	}
 
-	async execute({ id, name, alias, fee, userPolicy, __name }: CreateDealCommand): Promise<void> {
+	async handle({ id, name, alias, fee, userPolicy, __name }: CreateDealCommand): Promise<void> {
 		await this.authorizer.grant(
 			__name,
 			userPolicy,

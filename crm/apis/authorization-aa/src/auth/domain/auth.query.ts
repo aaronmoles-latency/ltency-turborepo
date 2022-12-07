@@ -1,6 +1,6 @@
 import { EventName } from '@latency/domain';
 
-import { Query } from '../../shared/use-case/query';
+import { Query } from '../../shared/cqrs/domain/query/query';
 import { UserPolicy } from './policy';
 
 export default class AuthQuery extends Query {

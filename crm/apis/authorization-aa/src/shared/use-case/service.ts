@@ -1,5 +1,5 @@
+import { Query } from '../cqrs/domain/query/query';
 import { Command } from './command';
-import { Query } from './query';
 
 interface Service<Req, Res> {
 	execute: (param: Req) => Promise<Res>

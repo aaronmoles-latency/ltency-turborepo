@@ -3,8 +3,8 @@ import httpStatus from 'http-status';
 
 import PolicyFactory from '../../../auth/domain/policy.factory';
 import Controller from '../../../shared/controller';
+import { CommandBus } from '../../../shared/cqrs/domain/command/command-bus';
 import { PutController } from '../../../shared/decorators/controller.decorator';
-import CreateDeal from '../../application/create-deal';
 import CreateDealCommand from '../../application/create-deal.command';
 
 type PutDealControllerRequest = Request<{id: string}, void, {name: string, alias: string, fee: number}>
@@ -12,7 +12,7 @@ type PutDealControllerRequest = Request<{id: string}, void, {name: string, alias
 @PutController('/deal/:id')
 export default class PutDealController implements Controller {
 	constructor(
-		private readonly createDeal: CreateDeal,
+		private readonly commandBus: CommandBus,
 	) {
 	}
 
@@ -25,7 +25,7 @@ export default class PutDealController implements Controller {
 			req.body.fee,
 			userPolicy,
 		)
-		await this.createDeal.execute(command)
+		await this.commandBus.dispatch(command)
 
 		res.status(httpStatus.CREATED).send();
 	}

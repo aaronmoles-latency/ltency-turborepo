@@ -18,9 +18,9 @@ export default class DealModule extends Module {
 	register(builder: ContainerBuilder): void {
 		builder.register(DealRepository).use(TypeormDealRepository)
 
-		builder.registerAndUse(ListDeals);
-		builder.registerAndUse(DetailDeal);
-		builder.registerAndUse(CreateDeal);
+		builder.registerAndUse(ListDeals).addTag(DiTag.QUERY_HANDLER);
+		builder.registerAndUse(DetailDeal).addTag(DiTag.QUERY_HANDLER);
+		builder.registerAndUse(CreateDeal).addTag(DiTag.COMMAND_HANDLER);
 
 		builder.registerAndUse(GetDealsController).addTag(DiTag.CONTROLLER);
 		builder.registerAndUse(GetDealController).addTag(DiTag.CONTROLLER);

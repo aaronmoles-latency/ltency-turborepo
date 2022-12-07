@@ -1,6 +1,6 @@
 import Authorizer from '../../auth/application/authorizer';
+import { QueryHandler } from '../../shared/cqrs/domain/query/query-handler';
 import { Service } from '../../shared/decorators/service.decorator';
-import { QueryService } from '../../shared/use-case/service';
 import { dealAdapter } from '../domain/deal.adapter';
 import DealDto from '../domain/deal.dto';
 import { DealRepository } from '../domain/deal.repository';
@@ -8,14 +8,15 @@ import DealId from '../domain/deal-id';
 import DetailDealQuery from './detail-deal.query';
 
 @Service()
-export default class DetailDeal implements QueryService<DetailDealQuery, DealDto>{
+export default class DetailDeal extends QueryHandler<DetailDealQuery, DealDto>{
 	constructor(
 		private readonly dealRepository: DealRepository,
 		private readonly authorizer: Authorizer,
 	) {
+		super(DetailDealQuery)
 	}
 
-	async execute({ id, __name, userPolicy }: DetailDealQuery): Promise<DealDto> {
+	async handle({ id, __name, userPolicy }: DetailDealQuery): Promise<DealDto> {
 		await this.authorizer.grant(
 			__name,
 			userPolicy,

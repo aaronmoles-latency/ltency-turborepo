@@ -1,6 +1,6 @@
 import { EventName } from '@latency/domain';
 
-import { Command } from '../../shared/use-case/command';
+import { Command } from '../../shared/cqrs/domain/command/command';
 import { UserPolicy } from './policy';
 
 export default class AuthCommand extends Command {
