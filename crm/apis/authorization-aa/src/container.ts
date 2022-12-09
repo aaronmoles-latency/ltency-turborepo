@@ -42,7 +42,7 @@ export const container = DiContainer(modules, (builder: ContainerBuilder) => {
 	builder.register(CommandHandlersMapper)
 		.useFactory((container) => {
 			const commandHandlers = container
-				.findTaggedServiceIdentifiers<CommandHandler<Command>>(DiTag.COMMAND_HANDLER)
+				.findTaggedServiceIdentifiers<CommandHandler<Command<unknown>>>(DiTag.COMMAND_HANDLER)
 				.map((identifier) => container.get(identifier))
 			return new CommandHandlersMapper(commandHandlers)
 		})

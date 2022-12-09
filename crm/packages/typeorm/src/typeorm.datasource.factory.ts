@@ -11,7 +11,7 @@ export class TypeormDatasourceFactory {
 		return new DataSource({
 			type: 'postgres',
 			url: env.get('DB_URL'),
-			synchronize: false,
+			synchronize: true, // TODO set false
 			logging: false,
 			entities,
 			subscribers: [],

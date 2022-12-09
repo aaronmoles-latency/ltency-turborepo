@@ -17,7 +17,6 @@ export default class CreateDeal extends CommandHandler<CreateDealCommand>{
 	}
 
 	async handle({ attributes }: CreateDealCommand): Promise<void> {
-		console.warn(attributes);
 		const deal = new Deal(
 			new DealId(attributes.value.id),
 			new DealName(attributes.value.name),
