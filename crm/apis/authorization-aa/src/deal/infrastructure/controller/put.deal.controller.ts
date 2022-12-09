@@ -19,10 +19,12 @@ export default class PutDealController implements Controller {
 	async run(req: PutDealControllerRequest, res: Response): Promise<void> {
 		const userPolicy = PolicyFactory.createUser();
 		const command = new CreateDealCommand(
-			req.params.id,
-			req.body.name,
-			req.body.alias,
-			req.body.fee,
+			{
+				id: req.params.id,
+				name: req.body.name,
+				alias: req.body.alias,
+				fee: req.body.fee,
+			},
 			userPolicy,
 		)
 		await this.commandBus.dispatch(command)

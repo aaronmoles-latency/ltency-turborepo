@@ -1,4 +1,4 @@
-import { EventName } from '@latency/domain';
+import { EventAttributes, EventName } from '@latency/domain';
 import { Notation } from 'notation';
 
 import { AuthorizationError } from '../domain/authorization.error';
@@ -16,7 +16,20 @@ export default class Authorizer {
 		}
 	}
 
-	filter(__name: EventName, userPolicy: UserPolicy, result: object): object {
+	private checkDimensions(userPolicy: UserPolicy, objectPolicy: ObjectPolicy) {
+		Object.keys(objectPolicy.dimensions).forEach((dimension) => {
+			if (!userPolicy[dimension]) {
+				throw new AuthorizationError(`UserPolicy not exists dimension ${dimension}`)
+			}
+			objectPolicy.dimensions[dimension].forEach((dimensionValue) => {
+				if (!userPolicy[dimension].some((userPolicyDimensionValue) => userPolicyDimensionValue === dimensionValue)) {
+					throw new AuthorizationError(`UserPolicy not contains value ${dimensionValue} in dimension ${dimension}`)
+				}
+			})
+		})
+	}
+
+	filter(name: EventName, userPolicy: UserPolicy, result: object): object {
 		const objectPolicy = PolicyFactory.createObject();
 		const notate = Notation.create;
 		const properties = [
@@ -29,16 +42,13 @@ export default class Authorizer {
 		return notate(result).filter(properties).value;
 	}
 
-	private checkDimensions(userPolicy: UserPolicy, objectPolicy: ObjectPolicy) {
-		Object.keys(objectPolicy.dimensions).forEach((dimension) => {
-			if (!userPolicy[dimension]) {
-				throw new AuthorizationError(`UserPolicy not exists dimension ${dimension}`)
-			}
-			objectPolicy.dimensions[dimension].forEach((dimensionValue) => {
-				if (!userPolicy[dimension].some((userPolicyDimensionValue) => userPolicyDimensionValue === dimensionValue)) {
-					throw new AuthorizationError(`UserPolicy not contains value ${dimensionValue} in dimension ${dimension}`)
-				}
-			})
-		})
+	filterAttributes(attributes: EventAttributes<unknown>, eventName: EventName) {
+		const objectPolicy = PolicyFactory.createObject();
+		const notate = Notation.create;
+		const properties = [
+			...(objectPolicy.attributes?.included ? objectPolicy.attributes.included! : ['*']),
+			...(objectPolicy.attributes?.excluded ? objectPolicy.attributes.excluded!.map((attribute) => `!${attribute}`) : []),
+		];
+		return new EventAttributes(notate(attributes.value).filter(properties).value);
 	}
 }

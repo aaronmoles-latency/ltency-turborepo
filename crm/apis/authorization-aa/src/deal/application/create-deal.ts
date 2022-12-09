@@ -16,12 +16,13 @@ export default class CreateDeal extends CommandHandler<CreateDealCommand>{
 		super(CreateDealCommand)
 	}
 
-	async handle({ id, name, alias, fee }: CreateDealCommand): Promise<void> {
+	async handle({ attributes }: CreateDealCommand): Promise<void> {
+		console.warn(attributes);
 		const deal = new Deal(
-			new DealId(id),
-			new DealName(name),
-			new DealAlias(alias),
-			new DealFee(fee),
+			new DealId(attributes.value.id),
+			new DealName(attributes.value.name),
+			new DealAlias(attributes.value.alias),
+			new DealFee(attributes.value.fee),
 		)
 		await this.dealRepository.save(deal)
 	}

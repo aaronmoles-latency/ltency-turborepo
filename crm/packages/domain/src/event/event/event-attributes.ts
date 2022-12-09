@@ -3,14 +3,18 @@ export class EventAttributes<T = Record<string, never>> {
 		return new EventAttributes({});
 	}
 
-	constructor(private readonly value: T) {
+	constructor(private readonly _value: T) {
+	}
+
+	get value(): T {
+		return this._value;
 	}
 
 	set(key: keyof T, value: T[keyof T]): void {
-		this.value[key] = value;
+		this._value[key] = value;
 	}
 
 	get(key: keyof T): T[keyof T] {
-		return this.value[key];
+		return this._value[key];
 	}
 }

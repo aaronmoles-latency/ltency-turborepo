@@ -1,35 +1,24 @@
-import { EventName } from '@latency/domain';
+import { EventAttributes, EventName } from '@latency/domain';
 
 import AuthCommand from '../../auth/domain/auth.command';
 import { UserPolicy } from '../../auth/domain/policy';
 
-export default class CreateDealCommand extends AuthCommand {
+type CreateDealCommandAttributes = {
+	id: string;
+	name: string;
+	alias: string;
+	fee: number,
+}
+
+export default class CreateDealCommand extends AuthCommand<CreateDealCommandAttributes> {
 	constructor(
-		private readonly _id: string,
-		private readonly _name: string,
-		private readonly _alias: string,
-		private readonly _fee: number,
+		data: CreateDealCommandAttributes,
 		userPolicy: UserPolicy,
 	) {
 		super(
 			EventName.command('funnel', 'deal', 'create'),
+			new EventAttributes(data),
 			userPolicy,
 		);
-	}
-
-	get id(): string {
-		return this._id;
-	}
-
-	get name(): string {
-		return this._name;
-	}
-
-	get alias(): string {
-		return this._alias;
-	}
-
-	get fee(): number {
-		return this._fee;
 	}
 }

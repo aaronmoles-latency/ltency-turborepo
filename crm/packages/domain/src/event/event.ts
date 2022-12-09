@@ -10,7 +10,7 @@ export abstract class Event<T = Record<string, never>> {
 		private readonly _id: EventId,
 		private readonly _name: EventName,
 		private readonly _occurredOn: EventOccurredOn,
-		private readonly _attributes: EventAttributes<T>,
+		private _attributes: EventAttributes<T>,
 		private readonly _meta: EventMeta,
 	) {
 	}
@@ -29,6 +29,10 @@ export abstract class Event<T = Record<string, never>> {
 
 	get attributes(): EventAttributes<T> {
 		return this._attributes;
+	}
+
+	updateAttributes(attributes: EventAttributes<T>): void {
+		this._attributes = attributes;
 	}
 
 	get type(): EventType {

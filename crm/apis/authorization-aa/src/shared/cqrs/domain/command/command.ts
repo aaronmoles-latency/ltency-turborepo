@@ -1,17 +1,23 @@
-import { EventId, EventName } from '@latency/domain';
+import {
+	Event,
+	EventAttributes,
+	EventId,
+	EventMeta,
+	EventName,
+	EventOccurredOn,
+} from '@latency/domain';
 
-export class Command {
+export class Command<A> extends Event<A> {
 	constructor(
-		private readonly ___name: EventName,
-		private readonly ___id: EventId = EventId.create(),
+		name: EventName,
+		attributes: EventAttributes<A>,
 	) {
-	}
-
-	get __name(): EventName {
-		return this.___name;
-	}
-
-	get __id(): EventId {
-		return this.___id;
+		super(
+			EventId.create(),
+			name,
+			EventOccurredOn.now(),
+			attributes,
+			EventMeta.empty(),
+		)
 	}
 }
