@@ -1,0 +1,10 @@
+{
+	"rootDir": "tests",
+  "testEnvironment": "node",
+	"testRegex": ".*\\.e2e-spec\\.ts$",
+	"transform": {
+		"^.+\\.tsx?$": "ts-jest"
+	},
+	"coverageDirectory": "./coverage",
+	"cacheDirectory": "./../tmp/jestCache"
+}
