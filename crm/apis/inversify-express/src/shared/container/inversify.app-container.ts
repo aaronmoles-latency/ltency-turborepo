@@ -1,4 +1,4 @@
-import { Container } from 'inversify';
+import { Container, decorate, injectable } from 'inversify';
 
 import { AppContainer } from './app-container';
 import {
@@ -22,17 +22,15 @@ export default class InversifyAppContainer implements AppContainer {
 
 	register(provider: Provider) {
 		console.warn('-> Register ');
-		// if (!this.container.isBound(getProviderId(provider))) {
 		if (isClassProvider(provider)) {
+			decorate(injectable(), provider.useClass)
 			this.container.bind(provider.provide).to(provider.useClass)
 		} else if (isValueProvider(provider)) {
-			// console.warn(`Register ${provider.provide.toString()}`);
 			this.container.bind(getProviderId(provider)).toConstantValue(provider.useValue)
 		} else if (isFactoryProvider(provider)) {
-			// console.warn(`Register ${provider.provide.toString()}`);
 			this.container.bind(getProviderId(provider)).toFactory(() => provider.useFactory(this))
 		} else {
-			// console.warn(`Register ${provider.name}`);
+			decorate(injectable(), provider)
 			this.container.bind(getProviderId(provider)).toSelf()
 		}
 		// }

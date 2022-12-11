@@ -1,10 +1,9 @@
-import { injectable } from 'inversify';
-
+import { UseCase } from '../../shared/container/decorators';
 import { UserDtoAdapter } from '../domain/dto/user.adapter';
 import UserDto from '../domain/dto/user.dto';
 import { UserRepository } from '../domain/user.repository';
 
-@injectable()
+@UseCase()
 export default class ListUsers {
 	constructor(
 		private readonly userRepository: UserRepository,

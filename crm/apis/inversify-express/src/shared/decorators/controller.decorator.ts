@@ -14,23 +14,18 @@ const HttpController = (path: string, method: HttpMethod): ClassDecorator => {
 export const GetController = (path: string): ClassDecorator => {
 	return combineDecorators(
 		HttpController(path, HttpMethod.GET),
-	);
+		// injectable,
+	)
 };
 
 export const PostController = (path: string): ClassDecorator => {
-	return combineDecorators(
-		HttpController(path, HttpMethod.POST),
-	);
+	return HttpController(path, HttpMethod.POST)
 };
 
 export const PutController = (path: string): ClassDecorator => {
-	return combineDecorators(
-		HttpController(path, HttpMethod.PUT),
-	);
+	return HttpController(path, HttpMethod.PUT)
 };
 
 export const DeleteController = (path: string): ClassDecorator => {
-	return combineDecorators(
-		HttpController(path, HttpMethod.DELETE),
-	);
+	return HttpController(path, HttpMethod.DELETE)
 };

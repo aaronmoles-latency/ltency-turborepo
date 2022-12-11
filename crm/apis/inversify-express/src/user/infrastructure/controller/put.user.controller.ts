@@ -1,13 +1,11 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status'
-import { injectable } from 'inversify';
 
 import Controller from '../../../shared/controller';
 import { PutController } from '../../../shared/decorators/controller.decorator';
 import UserUpdater from '../../application/user-updater';
 
 @PutController('/user/:id')
-@injectable()
 export default class PutUserController implements Controller {
 	constructor(
 		private readonly userUpdater: UserUpdater,

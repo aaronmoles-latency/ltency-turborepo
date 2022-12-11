@@ -1,9 +1,8 @@
-import { injectable } from 'inversify';
-
+import { UseCase } from '../../shared/container/decorators';
 import User from '../domain/user';
 import { UserRepository } from '../domain/user.repository';
 
-@injectable()
+@UseCase()
 export default class UserUpdater {
 	constructor(
 		private readonly userRepository: UserRepository,
