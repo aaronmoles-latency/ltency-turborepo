@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 
+import { HttpController } from '../../../shared/container/decorators';
 import Controller from '../../../shared/controller';
-import { GetController } from '../../../shared/decorators/controller.decorator';
 import ListUsers from '../../application/list-users';
 
-@GetController('/user')
+@HttpController()
 export default class GetUsersController implements Controller {
 	constructor(
 		private readonly listUsers: ListUsers,

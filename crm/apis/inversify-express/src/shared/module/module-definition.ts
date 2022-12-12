@@ -1,7 +1,5 @@
-import { Provider } from '../container/provider.types';
+export type ModuleDefinition<E extends Record<string, unknown>> = E
 
-export type ModuleDefinition<K extends string, E = void> = Record<K, Provider[]> & E
-
-export type ModularModuleDefinition<T extends string, E = void> = {
-	imports: ModularModuleDefinition<T, E>[],
-} & ModuleDefinition<T, E>
+export type ModularModuleDefinition<E extends Record<string, unknown>> = {
+	imports: ModularModuleDefinition<E>[],
+} & ModuleDefinition<E>

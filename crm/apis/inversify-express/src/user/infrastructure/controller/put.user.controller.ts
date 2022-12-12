@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import httpStatus from 'http-status'
 
+import { HttpController } from '../../../shared/container/decorators';
 import Controller from '../../../shared/controller';
-import { PutController } from '../../../shared/decorators/controller.decorator';
 import UserUpdater from '../../application/user-updater';
 
-@PutController('/user/:id')
+@HttpController()
 export default class PutUserController implements Controller {
 	constructor(
 		private readonly userUpdater: UserUpdater,

@@ -1,18 +1,18 @@
 import { ModularModuleDefinition, ModuleDefinition } from './module-definition';
 
-export default class ModuleBuilder<T extends string, E = void> {
-	private readonly modularModuleDefinition: ModularModuleDefinition<T, E>[];
+export default class ModuleBuilder<E extends Record<string, unknown>> {
+	private readonly modularModuleDefinition: ModularModuleDefinition<E>[];
 
 	constructor() {
 		this.modularModuleDefinition = []
 	}
 
-	public addModularModuleDefinition(mmd: ModularModuleDefinition<T, E>): ModuleBuilder<T, E> {
+	public addModularModuleDefinition(mmd: ModularModuleDefinition<E>): ModuleBuilder<E> {
 		this.modularModuleDefinition.push(mmd)
 		return this;
 	}
 
-	public addModuleDefinition(md: ModuleDefinition<T, E>): ModuleBuilder<T, E> {
+	public addModuleDefinition(md: ModuleDefinition<E>): ModuleBuilder<E> {
 		this.modularModuleDefinition.push({
 			imports: [],
 			...md,
@@ -20,7 +20,7 @@ export default class ModuleBuilder<T extends string, E = void> {
 		return this;
 	}
 
-	public build(): ModuleDefinition<T, E> {
+	public build(): ModuleDefinition<E> {
 		if (!this.modularModuleDefinition.length) {
 			throw new Error('Need at least one module definition to build.')
 		}
@@ -29,10 +29,10 @@ export default class ModuleBuilder<T extends string, E = void> {
 		)
 	}
 
-	private reduce(modularModuleDefinition: ModularModuleDefinition<T, E>): ModuleDefinition<T, E> {
+	private reduce(modularModuleDefinition: ModularModuleDefinition<E>): ModuleDefinition<E> {
 		const { imports, ...moduleDefinition } = modularModuleDefinition;
 		if (!imports?.length) {
-			return moduleDefinition as unknown as ModuleDefinition<T, E>;
+			return moduleDefinition as unknown as ModuleDefinition<E>;
 		}
 		return this.combine(
 			imports
@@ -41,7 +41,7 @@ export default class ModuleBuilder<T extends string, E = void> {
 		)
 	}
 
-	private combine(moduleDefinitions: ModuleDefinition<T, E>[]): ModuleDefinition<T, E> {
+	private combine(moduleDefinitions: ModuleDefinition<E>[]): ModuleDefinition<E> {
 		if (!moduleDefinitions.length) {
 			throw new Error('Need at least one element to combine.')
 		}

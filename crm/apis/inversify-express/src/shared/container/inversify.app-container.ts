@@ -21,7 +21,7 @@ export default class InversifyAppContainer implements AppContainer {
 	}
 
 	register(provider: Provider) {
-		console.warn('-> Register ');
+		console.warn('-> Register ', getProviderId(provider));
 		if (isClassProvider(provider)) {
 			decorate(injectable(), provider.useClass)
 			this.container.bind(provider.provide).to(provider.useClass)
@@ -30,6 +30,7 @@ export default class InversifyAppContainer implements AppContainer {
 		} else if (isFactoryProvider(provider)) {
 			this.container.bind(getProviderId(provider)).toFactory(() => provider.useFactory(this))
 		} else {
+			console.warn('Decorate', getProviderId(provider));
 			decorate(injectable(), provider)
 			this.container.bind(getProviderId(provider)).toSelf()
 		}
