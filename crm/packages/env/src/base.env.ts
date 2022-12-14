@@ -14,4 +14,8 @@ export abstract class BaseEnv<K extends EnvType> implements Env<K> {
 	public set(key: keyof K, value: K[keyof K]) {
 		this.env[key] = value;
 	}
+
+	public isTestEnv() {
+		return this.env['NODE_ENV'] === 'test';
+	}
 }
