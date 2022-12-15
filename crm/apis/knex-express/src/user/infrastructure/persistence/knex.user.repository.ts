@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import { InsertEntity } from '../../../knex';
 import RoleId from '../../../role/domain/role-id';
 import { Repository } from '../../../shared/decorators/repository.decorator';
 import { KnexConnection } from '../../../shared/knex/knex.connection';
@@ -14,19 +15,19 @@ export default class KnexUserRepository implements UserRepository {
 	}
 
 	async save(user: User): Promise<void> {
-		await this.connection.knex<UserEntity>('user')
+		await this.connection.knex('user')
 			.insert(this.toEntity(user))
 			.onConflict('id')
 			.merge()
 	}
 
 	findAll(): Promise<User[]> {
-		return this.connection.knex<UserEntity>('user')
+		return this.connection.knex('user')
 			.then((userEntities) =>
 				userEntities.map((userEntity) => this.toModel(userEntity)))
 	}
 
-	private toEntity(user: User): UserEntity {
+	private toEntity(user: User): InsertEntity<UserEntity> {
 		return ({
 			id: user.id.value,
 			name: user.name.value,
