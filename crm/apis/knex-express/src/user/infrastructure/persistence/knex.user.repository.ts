@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
-import { InsertEntity } from '../../../knex';
 import RoleId from '../../../role/domain/role-id';
 import { Repository } from '../../../shared/decorators/repository.decorator';
 import { KnexConnection } from '../../../shared/knex/knex.connection';
+import { InsertEntity } from '../../../shared/knex/knex.types';
 import User from '../../domain/user';
 import { UserRepository } from '../../domain/user.repository';
 import UserId from '../../domain/value-object/user-id';
