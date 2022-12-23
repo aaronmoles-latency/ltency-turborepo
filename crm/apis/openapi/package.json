@@ -1,0 +1,48 @@
+{
+  "name": "openapi",
+  "version": "0.0.0",
+  "description": "Test to express latency",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev src/index.ts --swc",
+    "build": "node build.js",
+    "docker:build": "node build.js && docker build . -t latency/typeorm-express",
+    "docker:run": "docker run -p 3000:3000 --rm latency/typeorm-express",
+    "test": "NODE_ENV=test jest",
+    "test:features": "NODE_ENV=test cucumber-js -p default",
+    "test:e2e": "NODE_ENV=test jest --config jest-e2e.config.json",
+    "lint": "eslint . --fix",
+    "clean": "rm -r dist",
+    "migration:check": "npx typeorm-ts-node-esm migration:generate migrations/check -d ./src/database.ts --check",
+    "migration:generate": "npx typeorm-ts-node-esm migration:generate migrations/Migration -d ./src/database.ts",
+    "migration:create": "npx typeorm-ts-node-esm migration:create migrations/ManualMigration -d ./src/database.ts",
+    "migration:run": "npx typeorm-ts-node-esm migration:run -d ./src/database.ts",
+    "migration:revert": "npx typeorm-ts-node-esm migration:revert -d ./src/database.ts"
+  },
+  "author": "amoles",
+  "license": "ISC",
+  "dependencies": {
+    "@apidevtools/swagger-parser": "10.1.0",
+    "@latency/domain": "*",
+    "@latency/express-server": "*",
+    "@latency/typeorm": "*",
+    "diod": "2.0.0",
+    "reflect-metadata": "0.1.13"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "8.9.0",
+    "@types/jest": "29.2.3",
+    "@types/supertest": "2.0.12",
+    "@types/uuid": "8.3.4",
+    "esbuild": "^0.14.54",
+    "esbuild-jest": "0.5.0",
+    "esbuild-plugin-decorator": "^0.4.0",
+    "eslint-config-custom": "*",
+    "jest": "29.3.1",
+    "supertest": "6.3.1",
+    "ts-jest": "29.0.3",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig": "*"
+  }
+}
