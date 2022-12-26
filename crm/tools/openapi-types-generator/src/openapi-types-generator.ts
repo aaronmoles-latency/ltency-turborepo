@@ -1,5 +1,6 @@
 import { Document } from './domain';
 import { OpenapiParser, OpenapiParserConfig } from './parser/openapi.parser';
+import { TsRoutesOpenapiWriter } from './writer/ts-routes.openapi.writer';
 import {
 	TsTypesOpenapiWriter,
 } from './writer/ts-types.openapi.writer';
@@ -17,6 +18,7 @@ export class OpenapiTypesGenerator {
 		this.parser = new OpenapiParser({ sourceFile })
 		this.writers = [
 			new TsTypesOpenapiWriter({ outDir }),
+			new TsRoutesOpenapiWriter({ outDir }),
 		]
 	}
 

@@ -11,6 +11,7 @@ describe('OpenapiTypesGenerator', () => {
 	const sourceFile = path.resolve(__dirname, '../example.openapi.yaml');
 	const outDir = path.resolve(process.cwd(), 'tmp');
 	const outTypesPath = path.resolve(outDir, 'types.ts');
+	const outRoutesPath = path.resolve(outDir, 'routes.ts');
 
 	it('create instance', () => {
 		new OpenapiTypesGenerator({
@@ -52,5 +53,19 @@ describe('OpenapiTypesGenerator', () => {
 		await generator.generate();
 
 		expect(fs.existsSync(outTypesPath)).toBeTruthy()
+	})
+
+	it('generate out file routes', async () => {
+		if (fs.existsSync(outRoutesPath)) {
+			fs.unlinkSync(outRoutesPath)
+		}
+
+		const generator = new OpenapiTypesGenerator({
+			sourceFile,
+			outDir,
+		})
+		await generator.generate();
+
+		expect(fs.existsSync(outRoutesPath)).toBeTruthy()
 	})
 });

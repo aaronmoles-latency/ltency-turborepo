@@ -4,7 +4,7 @@ import path from 'path';
 import { Document } from '../domain';
 import { OutDirNotDirectoryError } from '../errors/out-dir-not-directory.error';
 import { OutDirNotFoundError } from '../errors/out-dir-not-found.error';
-import { TsOpenapiGenerator } from '../generators/ts-openapi.generator';
+import { TsTypesGenerator } from '../generators/ts-types.generator';
 import { Writer, WriterConfig } from './writer';
 
 export class TsTypesOpenapiWriter implements Writer {
@@ -12,7 +12,7 @@ export class TsTypesOpenapiWriter implements Writer {
 
 	private readonly DEFAULT_FILE_CONTENT = '/* eslint-disable no-use-before-define */\n';
 
-	private readonly tsOpenapiGenerator: TsOpenapiGenerator;
+	private readonly tsTypesGenerator: TsTypesGenerator;
 
 	constructor(private readonly config: WriterConfig) {
 		const { outDir } = config;
@@ -23,7 +23,7 @@ export class TsTypesOpenapiWriter implements Writer {
 			throw new OutDirNotDirectoryError(outDir)
 		}
 
-		this.tsOpenapiGenerator = new TsOpenapiGenerator()
+		this.tsTypesGenerator = new TsTypesGenerator()
 	}
 
 	async write(document: Document): Promise<void> {
@@ -32,9 +32,10 @@ export class TsTypesOpenapiWriter implements Writer {
 		const schemas = {
 			...document.schemas,
 			...document.requestBodies,
+			...document.responseBodies,
 		};
 		Object.keys(schemas).forEach((schemaName) => {
-			fs.appendFileSync(outFile, this.tsOpenapiGenerator.generateSchema(schemaName, schemas[schemaName]))
+			fs.appendFileSync(outFile, this.tsTypesGenerator.generateSchema(schemaName, schemas[schemaName]))
 		})
 
 		const parameters = {
@@ -42,7 +43,7 @@ export class TsTypesOpenapiWriter implements Writer {
 			...document.queryParamsList,
 		};
 		Object.keys(parameters).forEach((paramName) => {
-			fs.appendFileSync(outFile, this.tsOpenapiGenerator.generateParam(paramName, parameters[paramName]))
+			fs.appendFileSync(outFile, this.tsTypesGenerator.generateParam(paramName, parameters[paramName]))
 		})
 	}
 }

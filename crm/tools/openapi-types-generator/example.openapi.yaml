@@ -315,6 +315,10 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/ApiResponse'
+                "401":
+                    $ref: '#/components/responses/Unauthorized'
+                default:
+                    $ref: '#/components/responses/Unauthorized'
             security:
                 - petstore_auth:
                       - write:pets
@@ -329,13 +333,6 @@ paths:
             responses:
                 "200":
                     description: successful operation
-                    content:
-                        application/json:
-                            schema:
-                                type: object
-                                additionalProperties:
-                                    type: integer
-                                    format: int32
             security:
                 - api_key: []
     /store/order:
@@ -609,6 +606,16 @@ components:
         schema:
             type: string
     schemas:
+        Error:
+            type: object
+            properties:
+                code:
+                    type: string
+                message:
+                    type: string
+            required:
+                - code
+                - message
         Order:
             type: object
             properties:
@@ -779,6 +786,19 @@ components:
                     type: string
             xml:
                 name: '##default'
+    responses:
+        NotFound:
+            description: The specified resource was not found
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Error'
+        Unauthorized:
+            description: Unauthorized
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Error'
     requestBodies:
         Pet:
             description: Pet object that needs to be added to the store

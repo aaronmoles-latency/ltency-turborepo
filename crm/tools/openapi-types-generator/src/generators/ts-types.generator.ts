@@ -7,7 +7,7 @@ import {
 	isReferenceObject,
 } from '../functions/checks';
 
-export class TsOpenapiGenerator {
+export class TsTypesGenerator {
 	public generateSchema(name: string, schema: OpenAPIV3_1.SchemaObject | OpenAPIV3_1.ReferenceObject): string {
 		return `export type ${ name } = ${this.getSchema(schema)}\n\n`
 	}
