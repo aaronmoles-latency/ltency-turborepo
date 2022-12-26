@@ -1,4 +1,4 @@
-import { Route } from '../domain';
+import { Route } from '../../domain';
 
 export class TsRoutesGenerator {
 	generateRoutes(routes: Route[]): string {

@@ -5,7 +5,7 @@ import {
 	isAnyOfSchema,
 	isOneOfSchema,
 	isReferenceObject,
-} from '../functions/checks';
+} from '../../functions/checks';
 
 export class TsTypesGenerator {
 	public generateSchema(name: string, schema: OpenAPIV3_1.SchemaObject | OpenAPIV3_1.ReferenceObject): string {

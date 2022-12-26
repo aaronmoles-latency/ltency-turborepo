@@ -12,6 +12,7 @@ describe('OpenapiTypesGenerator', () => {
 	const outDir = path.resolve(process.cwd(), 'tmp');
 	const outTypesPath = path.resolve(outDir, 'types.ts');
 	const outRoutesPath = path.resolve(outDir, 'routes.ts');
+	const outControllerPath = path.resolve(outDir, 'controllers.ts');
 
 	it('create instance', () => {
 		new OpenapiTypesGenerator({
@@ -67,5 +68,19 @@ describe('OpenapiTypesGenerator', () => {
 		await generator.generate();
 
 		expect(fs.existsSync(outRoutesPath)).toBeTruthy()
+	})
+
+	it('generate out file controller', async () => {
+		if (fs.existsSync(outControllerPath)) {
+			fs.unlinkSync(outControllerPath)
+		}
+
+		const generator = new OpenapiTypesGenerator({
+			sourceFile,
+			outDir,
+		})
+		await generator.generate();
+
+		expect(fs.existsSync(outControllerPath)).toBeTruthy()
 	})
 });

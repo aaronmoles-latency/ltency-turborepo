@@ -1,11 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 
-import { Document } from '../domain';
-import { OutDirNotDirectoryError } from '../errors/out-dir-not-directory.error';
-import { OutDirNotFoundError } from '../errors/out-dir-not-found.error';
-import { TsRoutesGenerator } from '../generators/ts-routes.generator';
-import { Writer, WriterConfig } from './writer';
+import { Document } from '../../domain';
+import { OutDirNotDirectoryError } from '../../errors/out-dir-not-directory.error';
+import { OutDirNotFoundError } from '../../errors/out-dir-not-found.error';
+import { Writer, WriterConfig } from '../writer';
+import { TsRoutesGenerator } from './ts-routes.generator';
 
 export class TsRoutesOpenapiWriter implements Writer {
 	private readonly FILE_NAME = 'routes.ts';

@@ -1,9 +1,10 @@
 import { Document } from './domain';
 import { OpenapiParser, OpenapiParserConfig } from './parser/openapi.parser';
-import { TsRoutesOpenapiWriter } from './writer/ts-routes.openapi.writer';
+import { TsControllerOpenapiWriter } from './writer/controller/ts-controller.openapi.writer';
+import { TsRoutesOpenapiWriter } from './writer/routes/ts-routes.openapi.writer';
 import {
 	TsTypesOpenapiWriter,
-} from './writer/ts-types.openapi.writer';
+} from './writer/types/ts-types.openapi.writer';
 import { Writer, WriterConfig } from './writer/writer';
 
 type Config = WriterConfig & OpenapiParserConfig
@@ -19,6 +20,7 @@ export class OpenapiTypesGenerator {
 		this.writers = [
 			new TsTypesOpenapiWriter({ outDir }),
 			new TsRoutesOpenapiWriter({ outDir }),
+			new TsControllerOpenapiWriter({ outDir }),
 		]
 	}
 

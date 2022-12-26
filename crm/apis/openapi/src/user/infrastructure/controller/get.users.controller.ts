@@ -5,7 +5,7 @@ import { GetController } from '../../../shared/decorators/controller.decorator';
 import ListUsers from '../../application/list-users';
 
 @GetController('/user')
-export default class GetUsersController implements Controller {
+export default class GetUsersController implements Controller<Request, Response> {
 	constructor(
 		private readonly listUsers: ListUsers,
 	) {
