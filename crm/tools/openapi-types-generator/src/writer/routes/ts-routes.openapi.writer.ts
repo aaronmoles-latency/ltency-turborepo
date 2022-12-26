@@ -22,6 +22,9 @@ export class TsRoutesOpenapiWriter implements Writer {
 		if (!fs.lstatSync(outDir).isDirectory()) {
 			throw new OutDirNotDirectoryError(outDir)
 		}
+		if (!fs.existsSync(outDir)){
+			fs.mkdirSync(outDir, { recursive: true });
+		}
 
 		this.tsRoutesGenerator = new TsRoutesGenerator()
 	}

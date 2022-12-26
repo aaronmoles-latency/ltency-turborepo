@@ -19,6 +19,11 @@ export class OpenapiTypesGeneratorCommand implements yargs.CommandModule {
 				describe: 'Folder where generate types file.',
 				demandOption: true,
 			})
+			.option('controllers', {
+				describe: 'Generate express controllers types.',
+				demandOption: false,
+				type: 'boolean',
+			})
 	}
 
 	async handler(args: yargs.Arguments) {
@@ -26,6 +31,7 @@ export class OpenapiTypesGeneratorCommand implements yargs.CommandModule {
 			const openapiTypesGenerator = new OpenapiTypesGenerator({
 				sourceFile: String(args.sourceFile),
 				outDir: String(args.outDir),
+				controllers: Boolean(args.controllers),
 			})
 			await openapiTypesGenerator.generate()
 		} catch (err) {

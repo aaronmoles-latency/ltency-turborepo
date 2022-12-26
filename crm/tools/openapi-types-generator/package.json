@@ -2,12 +2,19 @@
   "name": "@latency/openapi-types-generator",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+	"main": "./dist/openapi-types-generator.js",
+	"module": "./dist/openapi-types-generator.mjs",
+	"types": "./dist/openapi-types-generator.d.ts",
   "scripts": {
-    "test": "jesta",
+    "build": "rm -rf ./dist && tsc && chmod 755 ./dist/bin.js",
+		"postinstall": "npm run build",
+    "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint . --fix"
   },
+	"bin": {
+		"openapi-types-generator": "dist/bin.js"
+	},
   "keywords": [],
   "author": "",
   "license": "ISC",

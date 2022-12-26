@@ -202,8 +202,7 @@ paths:
                   description: ID of pet to return
                   required: true
                   schema:
-                      type: integer
-                      format: int64
+                      type: string
             responses:
                 "200":
                     description: successful operation
@@ -235,8 +234,7 @@ paths:
                   description: ID of pet that needs to be updated
                   required: true
                   schema:
-                      type: integer
-                      format: int64
+                      type: string
                 - name: name
                   in: query
                   description: Name of pet that needs to be updated
@@ -272,8 +270,7 @@ paths:
                   description: Pet id to delete
                   required: true
                   schema:
-                      type: integer
-                      format: int64
+                      type: string
             responses:
                 "400":
                     description: Invalid pet value
@@ -294,8 +291,7 @@ paths:
                   description: ID of pet to update
                   required: true
                   schema:
-                      type: integer
-                      format: int64
+                      type: string
                 - name: additionalMetadata
                   in: query
                   description: Additional Metadata
@@ -315,6 +311,10 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/ApiResponse'
+                "401":
+                    $ref: '#/components/responses/Unauthorized'
+                default:
+                    $ref: '#/components/responses/Unauthorized'
             security:
                 - petstore_auth:
                       - write:pets
@@ -329,13 +329,6 @@ paths:
             responses:
                 "200":
                     description: successful operation
-                    content:
-                        application/json:
-                            schema:
-                                type: object
-                                additionalProperties:
-                                    type: integer
-                                    format: int32
             security:
                 - api_key: []
     /store/order:
@@ -379,8 +372,7 @@ paths:
                   description: ID of order that needs to be fetched
                   required: true
                   schema:
-                      type: integer
-                      format: int64
+                      type: string
             responses:
                 "200":
                     description: successful operation
@@ -408,8 +400,7 @@ paths:
                   description: ID of the order that needs to be deleted
                   required: true
                   schema:
-                      type: integer
-                      format: int64
+                      type: string
             responses:
                 "400":
                     description: Invalid ID supplied
@@ -600,15 +591,25 @@ paths:
                     description: User not found
 components:
     parameters:
-      queryParam:
-        name: queryParam
-        in: query
-        description: Status values that need to be considered for filter
-        required: false
-        explode: true
-        schema:
-            type: string
+        queryParam:
+            name: queryParam
+            in: query
+            description: Status values that need to be considered for filter
+            required: false
+            explode: true
+            schema:
+                type: string
     schemas:
+        Error:
+            type: object
+            properties:
+                code:
+                    type: string
+                message:
+                    type: string
+            required:
+                - code
+                - message
         Order:
             type: object
             properties:
@@ -617,9 +618,7 @@ components:
                     format: int64
                     example: 10
                 petId:
-                    type: integer
-                    format: int64
-                    example: 198772
+                    type: string
                 quantity:
                     type: integer
                     format: int32
@@ -779,6 +778,19 @@ components:
                     type: string
             xml:
                 name: '##default'
+    responses:
+        NotFound:
+            description: The specified resource was not found
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Error'
+        Unauthorized:
+            description: Unauthorized
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Error'
     requestBodies:
         Pet:
             description: Pet object that needs to be added to the store

@@ -1,9 +1,11 @@
 {
   "extends": "tsconfig/base.package.json",
 	"compilerOptions": {
+		"outDir": "dist",
 		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true
+		"emitDecoratorMetadata": true,
+		"module": "CommonJS",
 	},
-  "exclude": ["**/*.spec.ts", "**/*.test.ts"],
+  "exclude": ["**/*.spec.ts", "**/*.test.ts", "tmp"],
   "include": ["**/*.ts"]
 }
