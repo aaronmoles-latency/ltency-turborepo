@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { OpenAPIV3_1 } from 'openapi-types';
 import path from 'path';
 
 import { Document } from '../domain';
@@ -28,20 +29,31 @@ export class TsTypesOpenapiWriter implements Writer {
 
 	async write(document: Document): Promise<void> {
 		const outFile = path.resolve(this.config.outDir, this.FILE_NAME);
+
 		fs.writeFileSync(outFile, this.DEFAULT_FILE_CONTENT)
-		const schemas = {
-			...document.schemas,
-			...document.requestBodies,
-			...document.responseBodies,
-		};
+		const schemas = document.schemas;
+		const parameters: Record<string, OpenAPIV3_1.ParameterObject[]> = {};
+
+		document.routes.forEach(({ id, requestBody, responseBodies, pathParams, queryParams }) => {
+			if (requestBody) {
+				schemas[`${id}RequestBody`] = requestBody
+			}
+			if (responseBodies) {
+				Object.keys(responseBodies).forEach((responseCode) => {
+					schemas[`${id}${responseCode}Response`] = responseBodies[responseCode]
+				})
+			}
+			if (pathParams) {
+				parameters[`${id}PathParams`] = pathParams;
+			}
+			if (queryParams) {
+				parameters[`${id}QueryParams`] = queryParams;
+			}
+		})
+
 		Object.keys(schemas).forEach((schemaName) => {
 			fs.appendFileSync(outFile, this.tsTypesGenerator.generateSchema(schemaName, schemas[schemaName]))
 		})
-
-		const parameters = {
-			...document.pathParamsList,
-			...document.queryParamsList,
-		};
 		Object.keys(parameters).forEach((paramName) => {
 			fs.appendFileSync(outFile, this.tsTypesGenerator.generateParam(paramName, parameters[paramName]))
 		})
