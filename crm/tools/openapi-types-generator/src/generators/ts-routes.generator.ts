@@ -6,10 +6,10 @@ export class TsRoutesGenerator {
 	}
 
 	private generateRoutesObject(routes: Route[]): string {
-		return routes.map((route) => `${route.id}: ${this.generateRouteObject(route)}`).join('');
+		return routes.map((route) => `\t${route.id}: ${this.generateRouteObject(route)}`).join('');
 	}
 
 	private generateRouteObject(route: Route): string {
-		return `{\n\t\tmethod: '${route.method}',\n\t\troute: '${route.route}'\n\t},\n`
+		return `{\n\t\tmethod: '${route.method}',\n\t\troute: '${route.route}',\n\t},\n`
 	}
 }
