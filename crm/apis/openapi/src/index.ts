@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import 'reflect-metadata';
-import './database';
+import 'module-alias/register';
 
 import { TypeormExpressApp } from './typeorm-express.app';
 

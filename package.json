@@ -4,6 +4,7 @@
   "private": true,
   "workspaces": [
     "crm/*/*",
+    "crm/docs",
     "gitops/*",
     "data/*"
   ],

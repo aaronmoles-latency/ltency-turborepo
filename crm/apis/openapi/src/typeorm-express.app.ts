@@ -1,7 +1,6 @@
 import { Logger } from '@latency/core';
 import { Env } from '@latency/env';
 import { Server, ServerEnvType } from '@latency/express-server';
-import { DataSource } from 'typeorm';
 
 import { container } from './container';
 import { registerControllers as registerRoutes } from './routes';
@@ -11,12 +10,10 @@ export class TypeormExpressApp {
 
 	async start(): Promise<void> {
 		await this.startServer()
-		await this.startDatabase()
 	}
 
 	async stop(): Promise<void> {
 		await this.stopServer()
-		await this.stopDatabase()
 	}
 
 	/* SERVER */
@@ -39,21 +36,5 @@ export class TypeormExpressApp {
 
 	async stopServer() {
 		return this.server?.stop();
-	}
-
-	/* DATABASE */
-
-	async startDatabase(): Promise<void> {
-		const dataSource = container.get(DataSource);
-		try {
-			await dataSource.initialize()
-		} catch (err) {
-			console.error('Error during Data Source initialization', err)
-		}
-	}
-
-	async stopDatabase(): Promise<void> {
-		const dataSource = container.get(DataSource);
-		await dataSource.destroy()
 	}
 }

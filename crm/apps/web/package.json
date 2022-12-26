@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+		"predev": "npm run generate:code",
     "build": "next build",
+		"prebuild": "npm run generate:code",
+		"generate:code": "mkdir -p gen && npx openapi-types-generator generate:types -s ../../docs/api/api.openapi.yaml -o gen",
     "start": "next start",
     "lint": "next lint"
   },
@@ -16,6 +19,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
+		"@latency/docs": "*",
+		"@latency/openapi-types-generator": "*",
     "eslint-config-custom": "*",
     "tsconfig": "*",
     "@types/node": "^17.0.12",

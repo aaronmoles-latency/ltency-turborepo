@@ -17,7 +17,7 @@ export class TypeormDatasourceFactory {
 			subscribers: [],
 			migrations: ['migrations/**/*{.ts,.js}'],
 			maxQueryExecutionTime: 1000,
-			migrationsRun: true,
+			migrationsRun: false,
 		})
 	}
 }
