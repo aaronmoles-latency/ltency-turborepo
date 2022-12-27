@@ -1,6 +1,6 @@
+import { routes } from '@autogen/routes';
 import { Request, Response } from 'express';
 
-import { routes } from '../../../../gen/routes';
 import Controller from '../../../shared/controller';
 import { GetController } from '../../../shared/decorators/controller.decorator';
 import ListUsers from '../../application/list-users';

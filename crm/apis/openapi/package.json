@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "prestart": "npm run generate:code",
-    "dev": "ts-node-dev src/index.ts --swc",
+    "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts --swc",
     "predev": "npm run generate:code",
     "build": "node build.js",
     "prebuild": "npm run generate:code",

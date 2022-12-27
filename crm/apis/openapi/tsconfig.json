@@ -1,6 +1,10 @@
 {
 	"compilerOptions": {
-		"outDir": "./dist"
+		"outDir": "./dist",
+		"baseUrl": ".",
+		"paths": {
+			"@autogen/*": ["./gen/*"]
+		},
 	},
 	"extends": "tsconfig/base.json",
 	"exclude": ["**/*.spec.ts", "**/*.test.ts"],
