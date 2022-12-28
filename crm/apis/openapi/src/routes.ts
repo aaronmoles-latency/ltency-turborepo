@@ -1,9 +1,10 @@
 import { Request, Response, Router } from 'express';
 
 import { container } from './container';
+import { config } from './container.config';
 import Controller from './shared/controller';
 import { controllers } from './shared/decorators/controller.decorator';
-import { DiTag } from './shared/di/di-tag';
+import { ControllerProvider, isControllerProvider } from './shared/di/config';
 import { HttpMethod } from './shared/http-method';
 
 function register(controller: Controller, router: Router) {
@@ -30,9 +31,9 @@ function register(controller: Controller, router: Router) {
 }
 
 export function registerControllers(router: Router) {
-	const controllerIds = container.findTaggedServiceIdentifiers(DiTag.CONTROLLER);
-	controllerIds.forEach((controllerId) => {
-		const controller = container.get(controllerId) as Controller;
+	const controllerProviders = config.filter((provider) => isControllerProvider(provider));
+	controllerProviders.forEach((controllerProvider) => {
+		const controller = container.get((controllerProvider as ControllerProvider).useClass) as Controller;
 		register(controller, router);
 	});
 }

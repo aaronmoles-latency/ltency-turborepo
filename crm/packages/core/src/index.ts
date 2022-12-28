@@ -1,3 +1,4 @@
+export * from './abstract-class'
 export * from './adapter'
 export * from './assert-never'
 export * from './is-null-or-undefined'

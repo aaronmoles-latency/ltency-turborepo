@@ -1,3 +1,3 @@
-export interface AbstractClass<T> {
+export interface AbstractClass<T> extends Function {
 	prototype: T;
 }

@@ -24,7 +24,7 @@ export class TypeormExpressApp {
 
 	async startServer() {
 		const logger = container.get(Logger);
-		const envService = container.get(Env<ServerEnvType>);
+		const envService = container.get<Env<ServerEnvType>>(Env<ServerEnvType>);
 		this.server = new Server({
 			logger,
 			envService,
