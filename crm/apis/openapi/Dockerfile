@@ -4,7 +4,8 @@ ENV NODE_ENV=production
 
 WORKDIR /usr/src/app
 
-COPY dist/index.js ./index.js
+COPY dist/index.js .
+COPY package.json .
 
 EXPOSE 3000
 CMD [ "node", "index.js" ]
