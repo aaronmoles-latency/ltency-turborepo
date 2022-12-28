@@ -23,6 +23,8 @@
   "license": "ISC",
   "dependencies": {
     "@apidevtools/swagger-parser": "10.1.0",
+    "@asyncapi/openapi-schema-parser": "2.0.1",
+    "@asyncapi/parser": "1.17.2",
     "@latency/domain": "*",
     "@latency/express-server": "*",
     "@latency/typeorm": "*",
